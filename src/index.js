@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap'
+import 'popper.js/dist/popper'
+import '@fortawesome/fontawesome-free/css/all.css'
+
+// import {createStore} from 'redux'
+// import {Provider} from 'react-redux'
+// import store from "./Store/store";
+//
+// const store= createStore(reducer)
 
 ReactDOM.render(
   <React.StrictMode>

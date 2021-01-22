@@ -1,0 +1,128 @@
+/*.portfolio .title h2 {*/
+/*    text-transform: uppercase;*/
+/*    color: #aaaaaa;*/
+/*    font-size: 1rem;*/
+/*    letter-spacing: 0.1rem;*/
+/*}*/
+
+/*.portfolio .title h2::after {*/
+/*    content: "";*/
+/*    width: 120px;*/
+/*    height: 1px;*/
+/*    background-color: #087F55;*/
+/*    margin: 4px 20px;*/
+/*    display: inline-block;*/
+/*}*/
+
+/*////*/
+
+/*.title {*/
+/*    background-color: #f8f9fa;*/
+/*    margin: 78px 0 140px 0;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*}*/
+
+/*.title p {*/
+/*    padding-left: 15px;*/
+/*    margin-bottom: 0;*/
+/*    margin-left: 69.500px;*/
+/*    line-height: 3;*/
+/*    font-size: 28px;*/
+/*    text-transform: uppercase;*/
+/*    font-family: "Poppins", sans-serif;*/
+/*    color: #556270;*/
+/*}*/
+
+/* .title pre {*/
+/*    line-height: 2.5;*/
+/*    padding: 20px 15px 0 0;*/
+/*    margin-right: 69.500px;*/
+/*    font-family: "Poppins", sans-serif;*/
+/*    color: #556270;*/
+/*}*/
+
+/*.title pre a {*/
+/*    color: #2abe8b*/
+/*}*/
+
+/* .title pre a:hover {*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*///*/
+
+
+.portfolio .row .col .filter li a {
+    margin: 0 .3rem;
+    padding: .4rem 1rem;
+    border-radius: 2px;
+    text-decoration: none;
+    color: #444444;
+    font-weight: 600;
+    font-size: .9rem;
+    text-transform: uppercase;
+}
+
+.portfolio .row .col .filter a:hover,
+.portfolio .row .col .filter li .active {
+    background-color: #2abe8b;
+    color: white;
+    cursor: pointer;
+}
+
+.portfolio .row .col .filter li:hover a {
+    color: white;
+}
+
+
+/*////*/
+
+.portfolio .portfolio-content {
+    margin-bottom: 7rem;
+}
+
+.portfolio .videos .videos-content {
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+}
+
+.portfolio .videos img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+}
+
+.portfolio .videos-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    transition: .5s ease;
+    z-index: -1;
+    position: absolute;
+    top: 89%;
+    padding: 0 10px;
+}
+
+.portfolio .videos-info p {
+    margin: 0;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.portfolio .videos:hover img {
+    filter: brightness(40%);
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+.portfolio .videos:hover .videos-info {
+    z-index: 1;
+}

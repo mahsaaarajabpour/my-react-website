@@ -1,0 +1,66 @@
+.contact .map {
+    margin: 0 0 60px 0;
+}
+
+.contact .info {
+    margin-bottom: 50px;
+}
+
+.contact .info .address:hover i,
+.contact .info .phone:hover i,
+.contact .info .email:hover i {
+    background-color: #556270;
+    color: #fff;
+}
+
+.contact .info i {
+    background-color: #edeff1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    color: #556270;
+    transition: all 0.3s ease-in-out;
+}
+
+.contact .info h3 {
+    color: #556270;
+    font-family: "Raleway", sans-serif;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 22px;
+    padding-left: 70px;
+}
+
+.contact .info p {
+    color: #8795a4;
+    padding-left: 70px;
+}
+
+.contact .form-control::placeholder,
+.contact .form-control {
+    color: #495057a6;
+    text-transform: capitalize;
+    font-size: 14px;
+}
+
+.contact .form-control textarea {
+    overflow: auto;
+}
+
+.contact .form-control:focus {
+    border-color: #2abe8b;
+    box-shadow: 0 0 0 0.2rem rgba(61, 190, 139, 0.17)
+}
+
+.contact .info .send-message {
+    display: flex;
+    justify-content: center;
+}
+
+.contact .info .send-message .my-btn {
+    padding: 6px 10px;
+}

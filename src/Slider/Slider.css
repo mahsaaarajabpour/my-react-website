@@ -1,0 +1,100 @@
+.carousel-indicators .active {
+    background-color: #2abe8b;
+}
+
+.carousel-indicators li {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50px !important;
+    border: none !important;
+}
+
+.carousel-inner .carousel-item img {
+    filter: brightness(50%);
+}
+
+.carousel-inner .carousel-item .active .carousel-caption {
+    position: absolute;
+}
+
+.carousel-inner .carousel-caption h2 {
+    position: relative;
+    display: none;
+    font-size: 3vw;
+    font-weight: bolder;
+}
+
+.carousel-inner .carousel-caption p {
+    position: relative;
+    display: none;
+    font-size: 1.5vw;
+}
+
+.carousel-inner .carousel-caption .btn-read-more {
+    position: relative;
+    display: none;
+    background-color: #2abe8b;
+    color: white;
+    font-size: 1vw;
+}
+
+.carousel-inner .active .carousel-caption h2 {
+    animation-name: h2;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    display: revert;
+}
+
+.carousel-inner .active .carousel-caption p {
+    animation-name: p;
+    animation-duration: 2.5s;
+    animation-fill-mode: forwards;
+    display: revert;
+}
+
+.carousel-inner .active .carousel-caption .btn-read-more {
+    animation-name: btn;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    display: revert;
+}
+
+@keyframes h2 {
+    0% {
+        opacity: 0;
+        bottom: 10vw;
+    }
+    50% {
+        opacity: 40%;
+
+    }
+    100% {
+        bottom: 2vw;
+    }
+}
+
+@keyframes p {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0;
+        top: 2vw;
+    }
+    100% {
+        top: -2vw;
+    }
+}
+
+@keyframes btn {
+    0% {
+        opacity: 0;
+    }
+    35% {
+        opacity: 0;
+        top: 2vw;
+    }
+    100% {
+        top: -2vw;
+    }
+}

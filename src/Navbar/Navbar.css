@@ -1,0 +1,32 @@
+.navbar {
+    padding: 0 4rem !important;
+    width: 100%;
+    line-height: 3.5;
+    position: fixed !important;
+    top: 0;
+    z-index: 100 !important;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .nav-logo {
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #556270;
+    margin-right: 2%;
+}
+
+.navbar .navbar-nav .nav-item a {
+    margin: 0 .8rem;
+    font-weight: 700;
+    color: #556270;
+}
+.navbar .navbar-collapse{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar .collapse .navbar-nav a.active,
+.navbar .collapse .navbar-nav .nav-item a:hover {
+    color: #2abe8b;
+}

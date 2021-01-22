@@ -1,0 +1,76 @@
+
+
+
+.my-pagination {
+    margin-bottom: 3%;
+    height: auto;
+    justify-content: space-between;
+    font-size: 1.5vw;
+    align-items: center;
+}
+.my-pagination .col{
+    text-align: center;
+}
+.my-pagination .prev , .my-pagination .next {
+    width: 10%;
+}
+
+.my-pagination .prev a,
+.my-pagination .next a ,
+.my-pagination .next-page-btn:hover ,
+.my-pagination .prev-page-btn:hover
+{
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #1b979b;
+}
+
+.my-pagination .center-page a {
+    background-color: #eeeeee;
+    height: auto;
+    width: 2.5rem;
+    display: inline-block;
+    color: black;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.center-page a.active, .center-page a:hover {
+    background-color: #20b8bd;
+    text-decoration: none;
+    color: white;
+}
+
+
+
+.my-pagination .prev .disabled-prevBtn,
+ .my-pagination .next .disabled-nextBtn {
+    cursor: default;
+    pointer-events: none;
+    color: white;
+}
+
+
+/*@media (max-width: 1199px) {*/
+/*}*/
+/*@media (max-width: 280px) {*/
+/*    .upper {*/
+/*        display: flex;*/
+/*        flex-direction: row;*/
+/*        justify-content: center;*/
+/*    }*/
+/*    .my-pagination{*/
+/*        !*height: 4rem;*!*/
+/*        width: 100px;*/
+/*        height: 200px;*/
+/*        flex-flow: column wrap;*/
+/*    }*/
+/*    .my-pagination .prev{*/
+
+/*    }*/
+/*}*/
+

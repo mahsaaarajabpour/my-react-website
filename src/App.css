@@ -1,12 +1,76 @@
+/*html,body{*/
+/*  height: 100%;*/
+/*  margin: 0;*/
+/*}*/
+/*body{*/
+/*  min-height:100%;*/
+/*  !*position:relative;*!*/
+/*  !*padding-bottom:[footer-height]*!*/
+/*}*/
+.wrapper{
+  min-height: 100%;
+}
+
+
 .App {
   text-align: center;
 }
+
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
+
+
+
+/*/////////////////////*//*title*/
+
+.title {
+  background-color: #f8f9fa;
+  margin: 78px 0 140px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title p {
+  padding-left: 15px;
+  margin-bottom: 0;
+  margin-left: 69.500px;
+  line-height: 3;
+  font-size: 28px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  color: #556270;
+}
+
+.title pre {
+  line-height: 2.5;
+  padding: 20px 15px 0 0;
+  margin-right: 69.500px;
+  font-family: "Poppins", sans-serif;
+  color: #444444;
+  font-weight: 200;
+}
+
+.title pre a {
+  color: #2abe8b
+}
+
+.title pre a:hover {
+  text-decoration: none;
+}
+
+/*///*/
+
+
+
+
+
+
+
+/*//////////////*/
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
