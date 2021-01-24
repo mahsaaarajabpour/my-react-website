@@ -7,96 +7,192 @@
 /*  !*position:relative;*!*/
 /*  !*padding-bottom:[footer-height]*!*/
 /*}*/
-.wrapper{
-  min-height: 100%;
+.wrapper {
+    min-height: 100%;
 }
 
 
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
-
-
 
 
 /*/////////////////////*//*title*/
 
 .title {
-  background-color: #f8f9fa;
-  margin: 78px 0 140px 0;
-  display: flex;
-  justify-content: space-between;
+    background-color: #f8f9fa;
+    margin: 78px 0 140px 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 .title p {
-  padding-left: 15px;
-  margin-bottom: 0;
-  margin-left: 69.500px;
-  line-height: 3;
-  font-size: 28px;
-  text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
-  color: #556270;
+    padding-left: 15px;
+    margin-bottom: 0;
+    margin-left: 69.500px;
+    line-height: 3;
+    font-size: 28px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    color: #556270;
 }
 
 .title pre {
-  line-height: 2.5;
-  padding: 20px 15px 0 0;
-  margin-right: 69.500px;
-  font-family: "Poppins", sans-serif;
-  color: #444444;
-  font-weight: 200;
+    line-height: 2.5;
+    padding: 20px 15px 0 0;
+    margin-right: 69.500px;
+    font-family: "Poppins", sans-serif;
+    color: #444444;
+    font-weight: 200;
 }
 
 .title pre a {
-  color: #2abe8b
+    color: #2abe8b
 }
 
 .title pre a:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 /*///*/
 
 
+.my-btn {
+    background-color: #2abe8b;
+    color: white;
+    border-radius: 6px;
+    line-height: 2;
+    border: none;
+    padding: 6px 10px;
+}
+
+.my-btn:hover {
+    color: white;
+    opacity: 80%;
+}
+
+.my-btn:focus {
+    outline: none;
+}
+
+/*////*/
+/*pagination*/
+.m-pagination {
+    margin-bottom: 3%;
+    width: 60rem;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5vw;
+    align-items: center;
+}
+
+.m-pagination .col {
+    text-align: center;
+}
+
+.m-pagination .prev,
+.m-pagination .next {
+    width: 40px;
+}
+
+.m-pagination .prev a,
+.m-pagination .next a {
+    display: inline-block;
+    color: #333232a1;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #eeeeee;
+    transition: 0.3s;
+    border: 1px solid #d0d4d3;
+
+}
+
+.m-pagination .next-page-btn:hover,
+.m-pagination .prev-page-btn:hover {
+    background-color: #d2cece;
+}
+
+.m-pagination .center-page a {
+    background-color: #eeeeee;
+    height: auto;
+    width: 2.5rem;
+    display: inline-block;
+    color: #333232a1;
+    border-radius: 5px;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.m-pagination .center-page a.active,
+.m-pagination .center-page a:hover {
+    background-color: #2abe8b;
+    text-decoration: none;
+    color: white;
+}
 
 
+.m-pagination .prev .disabled-prevBtn,
+.m-pagination .next .disabled-nextBtn {
+    cursor: default;
+    pointer-events: none;
+}
 
+
+@media (max-width: 767px) {
+    .m-pagination {
+        width: 200px;
+        justify-content: center;
+        font-size: 14px;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .m-pagination .center-page a {
+        display: none !important;
+    }
+
+    .m-pagination .center-page .active {
+        display: inline-block !important;
+    }
+}
 
 
 /*//////////////*/
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 // import PortfolioStyle from './Portfolio.css'
-import Pagination from '../Pagination/Pagination'
+import Pagination from './Pagination/Pagination'
 import {NavLink, Route} from "react-router-dom";
 
 import faker from 'faker/locale/en'
@@ -25,8 +25,8 @@ class portfolio extends Component {
     }
 
     renderVideos() {
-        var videos = [];
-        for (var i = 0; i < 9; i++) {
+        let videos = [];
+        for (let i = 0; i < 9; i++) {
             // console.log('22', i % 3)
             videos.push(
                 <div className="col-md-4 videos mt-4" key={i}>
@@ -59,7 +59,7 @@ class portfolio extends Component {
                         <NavLink to="/">Home</NavLink>   /   Portfolio
                     </pre>
                 </div>
-                <div className="container mt-2 mb-2">
+                <div className="container">
                     <div className="row">
                         <div className="col col-lg-12 d-flex justify-content-center">
                             <ul className="filter list-unstyled d-flex ">
@@ -73,7 +73,7 @@ class portfolio extends Component {
                     <div className="row portfolio-content">
                         {this.renderVideos()}
                     </div>
-                    <div className="row portfolio-footer">
+                    <div className="portfolio-footer">
                         <Route component={() => <Pagination pageCount={this.state.pageCount}
                                                             pageId={this.props.match.params.id}/>}/>
                     </div>

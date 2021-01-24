@@ -54,7 +54,7 @@ class login extends Component {
                     response.data[key].id = key
                     if (response.data[key].email === this.state.users.email) {
                         this.setState({emailVerify: true})
-                        if (response.data[key].password === this.state.users.password) {
+                        if (response.data[key].password.toString() === this.state.users.password) {
                             this.setState({passVerify: true})
                             this.setState({submit: true})
                             this.setState({userInfo: response.data[key]})
@@ -65,7 +65,7 @@ class login extends Component {
                     this.setState({emailVerify: false})
                     this.setState({passVerify: false})
                     this.setState({error: true})
-                    // console.log('no',this.state.emailVerify , this.state.passVerify)
+                    console.log('no',this.state.emailVerify , this.state.passVerify)
                 }
             }).catch(error => {
                 console.log(error)

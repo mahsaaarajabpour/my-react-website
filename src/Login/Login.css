@@ -26,21 +26,21 @@
     padding: 40px 20px;
 }
 
-.my-btn {
-    background-color: #2abe8b;
-    color: white;
-    border-radius: 6px;
-    line-height: 2;
-    border: none;
-}
+/*.my-btn {*/
+/*    background-color: #2abe8b;*/
+/*    color: white;*/
+/*    border-radius: 6px;*/
+/*    line-height: 2;*/
+/*    border: none;*/
+/*}*/
 
-.my-btn:hover {
-    color: white;
-    opacity: 80%;
-}
-.my-btn:focus {
-    outline: none;
-}
+/*.my-btn:hover {*/
+/*    color: white;*/
+/*    opacity: 80%;*/
+/*}*/
+/*.my-btn:focus {*/
+/*    outline: none;*/
+/*}*/
 
 .login input {
     background-color: #f6f6f6;

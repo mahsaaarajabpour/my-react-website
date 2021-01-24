@@ -18,7 +18,7 @@ class navbar extends Component {
                 <div className="collapse navbar-collapse" id="myNavDropdown">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/">Home <span className="sr-only">(current)</span></NavLink>
+                            <NavLink className="nav-link" to="/" exact>Home</NavLink>
                         </li>
                         {/*<li className="nav-item dropdown">*/}
                         {/*    <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="button"*/}
@@ -34,15 +34,14 @@ class navbar extends Component {
                         {/*    <a className="nav-link" href="/">Services</a>*/}
                         {/*</li>*/}
                         <li className="nav-item">
-
                             <NavLink className="nav-link" to="/portfolio/1">Portfolio</NavLink>
                         </li>
                         {/*<li className="nav-item">*/}
                         {/*    <a className="nav-link" href="/">Pricing</a>*/}
                         {/*</li>*/}
-                        {/*<li className="nav-item">*/}
-                        {/*    <a className="nav-link" href="/">Blog</a>*/}
-                        {/*</li>*/}
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/blogs/1">Blogs</NavLink>
+                        </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/contact">Contact</NavLink>
                         </li>

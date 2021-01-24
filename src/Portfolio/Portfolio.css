@@ -79,8 +79,9 @@
 /*////*/
 
 .portfolio .portfolio-content {
-    margin-bottom: 7rem;
+    margin-bottom: 4rem;
 }
+
 
 .portfolio .videos .videos-content {
     overflow: hidden;
@@ -125,4 +126,10 @@
 
 .portfolio .videos:hover .videos-info {
     z-index: 1;
+}
+
+.portfolio .portfolio-footer {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
 }
