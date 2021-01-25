@@ -1,4 +1,4 @@
-.blogs-view .blog .entry {
+.entry {
     margin-bottom: 50px;
     overflow: hidden;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -33,17 +33,28 @@
     display: flex;
     padding: 0;
 }
+.blogs-view .blog .content ul li i{
+    padding: 0.25rem 0.25rem 0.25rem 0;
+}
 
 
 .blogs-view .blog .content ul li,
 .blogs-view .blog .content ul li a {
     list-style: none;
-    padding-right: 20px;
+    padding: 0;
     color: #a4afba;
     font-size: 14px;
     line-height: 1;
 }
+.blogs-view .blog .entry .content p{
+    color: #444444;
+    line-height: 24px;
+    font-size: 15px;
 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 /*/////*/
 .blogs-footer {
     padding: 15px;
@@ -57,6 +68,17 @@
     margin-bottom: 50px;
 }
 
+
+@media (max-width: 1024px ) and (min-width:768px){
+    .blogs-view .blog .content ul {
+        flex-direction: column;
+    }
+
+    .blogs-view .blog .content ul li {
+        margin-top: 10px;
+    }
+}
+
 @media (max-width: 450px) {
     .blogs-view .blog .content ul {
         flex-direction: column;
@@ -65,6 +87,5 @@
     .blogs-view .blog .content ul li {
         margin-top: 10px;
     }
-
 
 }

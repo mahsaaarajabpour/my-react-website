@@ -4,9 +4,6 @@ import faker from 'faker/locale/en'
 import './Blogs.css'
 import axios from "axios";
 
-// import * as path from "path";
-
-
 class Blogs extends Component {
     constructor(props) {
         super(props);
@@ -62,29 +59,45 @@ class Blogs extends Component {
                                         <NavLink
                                             to={{
                                                 pathname: '/blog/' + blog.id,
-                                                state: {paramsId: this.props.match.params.id}
+                                                state: {
+                                                    paramsId: this.props.match.params.id,
+                                                    blog: blog
+                                                }
                                             }}>
                                             {blog.title}
                                         </NavLink>
                                     </h2>
                                     <ul>
-                                        <li className=""><i className="fas fa-user p-1"></i>
+                                        <li className="col"><i className="fas fa-user"></i>
                                             <NavLink to={{
                                                 pathname: '/blog/' + blog.id,
-                                                state: {paramsId: this.props.match.params.id}
+                                                state: {
+                                                    paramsId: this.props.match.params.id,
+                                                    blog: blog
+                                                }
                                             }}>{blog.writer}</NavLink>
                                         </li>
-                                        <li className=""><i className="far fa-clock p-1"></i>
+                                        <li className="col"><i className="far fa-clock"></i>
                                             <NavLink to={{
                                                 pathname: '/blog/' + blog.id,
-                                                state: {paramsId: this.props.match.params.id}
-                                            }}>B</NavLink>
+                                                state: {
+                                                    paramsId: this.props.match.params.id,
+                                                    blog: blog
+                                                }
+                                            }}>
+                                                {faker.date.past().getDate() + '.' +
+                                                faker.date.past().getMonth() + '.' +
+                                                faker.date.past().getFullYear()}
+                                            </NavLink>
                                         </li>
                                     </ul>
                                     <p>{blog.content}</p>
                                     <NavLink to={{
                                         pathname: '/blog/' + blog.id,
-                                        state: {paramsId: this.props.match.params.id}
+                                        state: {
+                                            paramsId: this.props.match.params.id,
+                                            blog: blog
+                                        }
                                     }} className="my-btn">read more</NavLink>
                                 </div>
                             </div>
