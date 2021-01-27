@@ -108,10 +108,11 @@ class Blog extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col form-group pl-0 ">
-                        <input className="form-control"
+                        <textarea className="form-control"
                                placeholder="your comment"
+                                  rows="5"
                                required
-                        />
+                        ></textarea>
                     </div>
                 </div>
                 <div className="row send-message">

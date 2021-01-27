@@ -98,3 +98,13 @@
         top: -2vw;
     }
 }
+@media (max-width: 991px) {
+    .slide{
+        margin-top: 93px;
+    }
+}
+@media (max-width: 192px) {
+    .slide{
+        margin-top: 133px;
+    }
+}

@@ -20,19 +20,19 @@ class footer extends Component {
                         </p>
                         <ul className="social-media">
                             <li>
+                                {/* eslint-disable-next-line react/jsx-no-target-blank */}
+                                <a target="_blank" href="https://github.com/mahsaaarajabpour/my-react-website">
+                                    <i className="fab fa-github"></i>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="/">
-                                    <i className="fab fa-twitter"></i>
+                                    <i className="fab fa-gitlab"></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="/">
                                     <i className="fab fa-facebook-f"></i>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="/">
-                                    <i className="fab fa-instagram"></i>
                                 </a>
                             </li>
                             <li>

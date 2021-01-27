@@ -71,7 +71,6 @@ class login extends Component {
                 console.log(error)
             }
         )
-
     }
 
     logOut=()=>{

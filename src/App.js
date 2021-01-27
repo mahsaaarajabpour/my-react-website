@@ -2,16 +2,15 @@ import React, {Component} from 'react'
 import {BrowserRouter, Route} from "react-router-dom";
 
 import './App.css';
-
 import Footer from './Footer/Footer'
 import Navbar from './Navbar/Navbar'
 import Blogs from './Blogs/Blogs'
-// import Slider from './Slider/Slider'
 import Portfolio from './Portfolio/Portfolio'
 import Login from './Login/Login'
 import SignUp from './SignUp/SignUp'
 import Contact from './Contact/Contact'
 import Blog from "./Blogs/Blog/Blog";
+import CreateBlog from "./Blogs/CreateBlog/CreateBlog"
 
 class App extends Component {
     render() {
@@ -28,6 +27,7 @@ class App extends Component {
                         <Route component={Blogs} path="/blogs" exact/>
                         <Route component={Blogs} path="/blogs/:id" exact/>
                         <Route component={Blog} path="/blog/:id"/>
+                        <Route component={CreateBlog} path="/create-blog"/>
 
                     </div>
                     <Footer/>

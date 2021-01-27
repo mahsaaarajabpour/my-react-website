@@ -183,8 +183,14 @@ class Blogs extends Component {
                     </pre>
                 </div>
                 <div className="container ">
-                    <div className="row blogs-header">
-
+                    <div className="row blogs-header justify-content-between">
+                        <h3><NavLink to={{
+                            pathname: '/create-blog',
+                            state: {
+                                paramsId: this.props.match.params.id,
+                            }
+                        }}>create new blog</NavLink></h3>
+                        <p>page {this.props.match.params.id} of {this.state.blogPageCount}</p>
                     </div>
                     <div className="row blogs-content">
                         {this.renderBlogs()}

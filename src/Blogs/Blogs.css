@@ -4,6 +4,19 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
+.blogs-view .blogs-header{
+    padding: 15px 15px 40px 15px;
+}
+.blogs-view .blogs-header a{
+    color: #556270;
+    font-weight: bold;
+    text-transform: capitalize;
+    transition: 0.3s;
+}
+.blogs-view .blogs-header a:hover{
+    color: #2abe8b;
+}
+
 .blogs-view .blog .content {
     padding: 25px;
 }
