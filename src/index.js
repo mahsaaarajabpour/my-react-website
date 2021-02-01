@@ -8,17 +8,17 @@ import 'bootstrap/dist/js/bootstrap'
 import 'popper.js/dist/popper'
 import '@fortawesome/fontawesome-free/css/all.css'
 
-// import {createStore} from 'redux'
-// import {Provider} from 'react-redux'
-// import store from "./Store/store";
-//
-// const store= createStore(reducer)
+import {createStore, applyMiddleware} from 'redux'
+import {Provider} from 'react-redux'
+import userInfoReducer from "./Store/userInfoReducer";
+import thunk from "redux-thunk";
+
+const store = createStore(userInfoReducer, applyMiddleware(thunk))
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Provider store={store}><App/></Provider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import './Login.css'
 import {NavLink} from "react-router-dom";
 import Slider from "../Slider/Slider";
-
+import {connect} from "react-redux"
 import axios from "axios";
-
+import * as actionCreators from '../Store/actions/index'
 
 class login extends Component {
     constructor() {
@@ -18,7 +18,7 @@ class login extends Component {
             emailVerify: null,
             passVerify: null,
             error: false,
-            submit: false,
+            // submit: false,
         }
     }
 
@@ -56,16 +56,16 @@ class login extends Component {
                         this.setState({emailVerify: true})
                         if (response.data[key].password.toString() === this.state.users.password) {
                             this.setState({passVerify: true})
-                            this.setState({submit: true})
+                            // this.setState({submit: true})
                             this.setState({userInfo: response.data[key]})
+                            this.props.onLogin(this.state.userInfo)
                         }
                     }
                 }
-                if (!this.state.emailVerify || !this.state.passVerify){
+                if (!this.state.emailVerify || !this.state.passVerify) {
                     this.setState({emailVerify: false})
                     this.setState({passVerify: false})
                     this.setState({error: true})
-                    console.log('no',this.state.emailVerify , this.state.passVerify)
                 }
             }).catch(error => {
                 console.log(error)
@@ -73,12 +73,12 @@ class login extends Component {
         )
     }
 
-    logOut=()=>{
-       return  this.setState({submit:false})
-    }
+    // logOut = () => {
+    //     return this.setState({submit: false})
+    // }
 
     renderLoginForm() {
-                // console.log('dd',this.state.emailVerify )
+        // console.log('dd',this.state.emailVerify )
         return (
             <div className="col-lg-6 col-md-6 col-sm-10 p-0 main-form">
                 <div className="form-header ">
@@ -86,8 +86,8 @@ class login extends Component {
                 </div>
                 <div className="center">
                     <form className="col-10 login-body" onSubmit={this.signIn}>
-                        {(this.state.emailVerify===false || this.state.emailVerify===false) &&
-                        <p  className="alert-danger text-center text-danger"> incorrect data </p>
+                        {(this.state.emailVerify === false || this.state.emailVerify === false) &&
+                        <p className="alert-danger text-center text-danger"> incorrect data </p>
                         }
                         {/*// <!--email-->*/}
                         <div className="form-group input-group">
@@ -125,10 +125,10 @@ class login extends Component {
         return (
             <div className="col-lg-6 col-md-6 col-sm-10 welcome-form">
                 <div className="p-0 ">
-                    <p className="text-center m-0">hi {this.state.userInfo.name} </p>
+                    <p className="text-center m-0">hi {this.props.info.name} </p>
                 </div>
                 <div>
-                    <button className="my-btn" onClick={this.logOut}>log out</button>
+                    <button className="my-btn" onClick={this.props.onLogOut}>log out</button>
                 </div>
             </div>
         )
@@ -136,7 +136,7 @@ class login extends Component {
 
     render() {
         let loginForm = '';
-        if (!this.state.submit) {
+        if (!this.props.submit) {
             loginForm = this.renderLoginForm()
         } else {
             loginForm = this.renderWelcomeFrom()
@@ -152,4 +152,17 @@ class login extends Component {
     }
 }
 
-export default login;
+const mapStateToProps = state => {
+    return {
+        info: state.loginInfo,
+        submit: state.loginAuthenticate
+    }
+
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogin: (value) => dispatch(actionCreators.userInfoLogin(value)),
+        onLogOut: () => dispatch(actionCreators.userLogOut())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(login);

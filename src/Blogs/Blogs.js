@@ -28,7 +28,7 @@ class Blogs extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://addblog-vuejs.firebaseio.com/posts.json')
+        axios.get('https://my-shop-react-cdca2-default-rtdb.firebaseio.com/blog.json')
             .then(res => {
                 for (let key in res.data) {
                     res.data[key].id = key
@@ -107,8 +107,9 @@ class Blogs extends Component {
             )
         } else {
             return (
-                <div className="col center mb-5 loading">
-                    <p><i className="fa fa-spinner fa-spin"/> Loading ...</p>
+                <div className="col mb-5 loading">
+                    <p className="row justify-content-center"><i className="fa fa-spinner fa-spin p-1"/> Loading ...</p>
+                    <p className="row vpn">please connect to your vpn</p>
                 </div>
             )
         }
@@ -184,12 +185,12 @@ class Blogs extends Component {
                 </div>
                 <div className="container ">
                     <div className="row blogs-header justify-content-between">
-                        <h3><NavLink to={{
+                        <h5><NavLink to={{
                             pathname: '/create-blog',
                             state: {
                                 paramsId: this.props.match.params.id,
                             }
-                        }}>create new blog</NavLink></h3>
+                        }}>click to create new blog</NavLink></h5>
                         <p>page {this.props.match.params.id} of {this.state.blogPageCount}</p>
                     </div>
                     <div className="row blogs-content">

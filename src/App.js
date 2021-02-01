@@ -11,6 +11,7 @@ import SignUp from './SignUp/SignUp'
 import Contact from './Contact/Contact'
 import Blog from "./Blogs/Blog/Blog";
 import CreateBlog from "./Blogs/CreateBlog/CreateBlog"
+// import Home from "./Home/Home"
 
 class App extends Component {
     render() {
@@ -19,6 +20,7 @@ class App extends Component {
                 <div className="wrapper">
                     <Navbar/>
                     <div className="">
+                        {/*<Route component={Home} path="/" exact/>*/}
                         <Route component={Login} path="/" exact/>
                         <Route component={Portfolio} path="/portfolio" exact/>
                         <Route component={Portfolio} path="/portfolio/:id" exact/>

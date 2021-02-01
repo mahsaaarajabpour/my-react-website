@@ -4,16 +4,18 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.blogs-view .blogs-header{
+.blogs-view .blogs-header {
     padding: 15px 15px 40px 15px;
 }
-.blogs-view .blogs-header a{
+
+.blogs-view .blogs-header a {
     color: #556270;
     font-weight: bold;
     text-transform: capitalize;
     transition: 0.3s;
 }
-.blogs-view .blogs-header a:hover{
+
+.blogs-view .blogs-header a:hover {
     color: #2abe8b;
 }
 
@@ -27,6 +29,10 @@
     font-weight: bold;
     padding: 0;
     margin: 0 0 20px 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .blogs-view a:hover {
@@ -46,7 +52,8 @@
     display: flex;
     padding: 0;
 }
-.blogs-view .blog .content ul li i{
+
+.blogs-view .blog .content ul li i {
     padding: 0.25rem 0.25rem 0.25rem 0;
 }
 
@@ -59,7 +66,8 @@
     font-size: 14px;
     line-height: 1;
 }
-.blogs-view .blog .entry .content p{
+
+.blogs-view .blog .entry .content p {
     color: #444444;
     line-height: 24px;
     font-size: 15px;
@@ -68,6 +76,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 /*/////*/
 .blogs-footer {
     padding: 15px;
@@ -81,8 +90,14 @@
     margin-bottom: 50px;
 }
 
+.blogs-view .loading .vpn {
+    justify-content: center;
+    font-size: 0.9rem;
+    text-align: center;
+}
 
-@media (max-width: 1024px ) and (min-width:768px){
+
+@media (max-width: 1024px ) and (min-width: 768px) {
     .blogs-view .blog .content ul {
         flex-direction: column;
     }

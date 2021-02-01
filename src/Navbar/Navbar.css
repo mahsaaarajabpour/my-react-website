@@ -14,6 +14,9 @@
     color: #556270;
     margin-right: 2%;
 }
+.navbar .nav-logo:hover{
+    text-decoration: none;
+}
 
 .navbar .navbar-nav .nav-item a {
     margin: 0 .8rem;
@@ -28,4 +31,27 @@
 .navbar .collapse .navbar-nav a.active,
 .navbar .collapse .navbar-nav .nav-item a:hover {
     color: #2abe8b;
+}
+.dropdown-menu{
+    position: absolute;
+    top: 100%;
+     left: unset !important;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 7.5rem !important;
+     padding: 0 !important;
+     margin:  0 !important;
+    font-size: 1rem;
+    color: #212529;
+    text-align: center !important;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+}
+.my-dropdown a,
+.my-dropdown a:hover{
+    color: #556270;
 }

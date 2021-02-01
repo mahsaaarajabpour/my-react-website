@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
-// import PortfolioStyle from './Portfolio.css'
 import Pagination from './Pagination/Pagination'
 import {NavLink, Route} from "react-router-dom";
-
 import faker from 'faker/locale/en'
 import './Portfolio.css'
 
@@ -27,7 +25,6 @@ class portfolio extends Component {
     renderVideos() {
         let videos = [];
         for (let i = 0; i < 9; i++) {
-            // console.log('22', i % 3)
             videos.push(
                 <div className="col-md-4 videos mt-4" key={i}>
                     <div className="w-auto videos-content">
