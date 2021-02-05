@@ -54,8 +54,6 @@ class Blog extends React.Component {
         )
     }
 
-    // renderUserComment()
-
     renderComments() {
         let comment = [];
         for (let i = 1; i <= 8; i++) {

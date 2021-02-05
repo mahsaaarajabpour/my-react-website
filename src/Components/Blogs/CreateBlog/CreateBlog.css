@@ -17,10 +17,8 @@
     box-shadow: 0 0 0 0.2rem rgba(61, 190, 139, 0.17)
 }
 
-
 /*/////*/
 /*Check box*/
-
 
 .create-blog label{
     position: relative;
@@ -58,23 +56,12 @@
     animation: effect 250ms ease-in;
 }
 
-/*.create-blog input[type="checkbox"]:disabled + .label-text{*/
-/*    color: red;*/
-/*}*/
-
-/*.create-blog input[type="checkbox"]:disabled + .label-text:before{*/
-/*    content: "\f111";*/
-/*    color: #ccc;*/
-/*}*/
-
-
 @keyframes effect{
     0%{transform: scale(0);}
     25%{transform: scale(0.25);}
     75%{transform: scale(0.5);}
     100%{transform: scale(1);}
 }
-
 
 /*///*/
 

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
 import './CreateBlog.css'
 import axios from "axios";
+import {connect} from 'react-redux'
 
 class createBlog extends Component {
     constructor() {
@@ -11,15 +12,14 @@ class createBlog extends Component {
                 title: '',
                 content: '',
                 categories: [],
-                writer: '',
             },
-            submitted: false,
+            postedBlog: false,
         }
     }
 
     renderPostBlogForm() {
         return (
-            <div className="row main-form center">
+            <div className="row main-form  d-flex justify-content-center">
                 <form className="col-md-10 create-blog-body" onSubmit={this.postBlog}>
                     <div className="pb-3">
                         <input type="text"
@@ -40,7 +40,6 @@ class createBlog extends Component {
                             <label>
                                 <input type="checkbox"
                                        name="front-end"
-                                       checked={this.state.chkbox}
                                        onChange={event => this.handleChange(event, 'categories')}
                                 />
                                 <span className="label-text">front-end</span>
@@ -79,30 +78,46 @@ class createBlog extends Component {
                     <hr/>
                     <div className="main-form p-4">
                         <h4 className="mb-5">Preview</h4>
+                        {this.props.submit &&
                         <div className="">
                             <label className="m-0  pb-2">writer :</label><span className="pr-3"></span>
-                            <p  className="d-inline-block">{this.state.newBlog.writer}</p>
+                            <p className="d-inline-block">{this.props.info.name + ' ' + this.props.info.lastName}</p>
                         </div>
-                       <div className="">
-                           <label className="m-0  pb-2">title :</label><span className="pr-3"></span>
-                           <p className="d-inline-block">{this.state.newBlog.title}</p>
-                       </div>
+                        }
+                        <div className="">
+                            <label className="m-0  pb-2">title :</label><span className="pr-3"></span>
+                            <p className="d-inline-block">{this.state.newBlog.title}</p>
+                        </div>
                         <div className="">
                             <label className="m-0  pb-2">content :</label><span className="pr-3"></span>
-                            <p  className="d-inline-block">{this.state.newBlog.content}</p>
+                            <p className="d-inline-block">{this.state.newBlog.content}</p>
                         </div>
                         <div className="">
                             <label className="m-0  pb-2">categories :</label><span className="pr-3"></span>
-                            {this.state.newBlog.categories.map((category,index)=>{
-                                return<p  className="d-inline-block" key={index}>{category},<span className="pr-1"></span></p>
-
+                            {this.state.newBlog.categories.map((category, index) => {
+                                return <p className="d-inline-block" key={index}>{category},
+                                    <span className="pr-1"></span>
+                                </p>
                             })}
-                            {/*<p  className="d-inline-block">{this.state.newBlog.categories}</p>*/}
                         </div>
                     </div>
+                    {!this.props.submit &&
+                    <div>
+                        <div className="row justify-content-center">
+                            <button type="submit" className="my-btn pr-5 pl-5 font-weight-bold disabled-Btn">post
+                            </button>
+                        </div>
+                        <div className="row justify-content-center mt-1">
+                            <p className="alert-danger p-1">for posting a blog , you should login first!</p>
+                        </div>
+                    </div>
+                    }
+                    {this.props.submit &&
                     <div className="row justify-content-center">
                         <button type="submit" className="my-btn pr-5 pl-5 font-weight-bold">post</button>
                     </div>
+                    }
+
                 </form>
             </div>
         )
@@ -123,13 +138,16 @@ class createBlog extends Component {
 
     postBlog = (event) => {
         event.preventDefault();
-        axios.post("https://my-shop-react-cdca2-default-rtdb.firebaseio.com/blog.json", this.state.newBlog)
+        let  array= {...this.state.newBlog}
+        array.writer=this.props.info.name + ' ' +this.props.info.lastName
+        this.setState({newBlog:array})
+        axios.post("https://my-shop-react-cdca2-default-rtdb.firebaseio.com/blog.json", array)
             .then(response => {
-                console.log('res', response)
-                this.setState({submitted: true})
+                console.log('response', response)
+                this.setState({postedBlog: true})
             })
             .catch(error => {
-                console.log('err', error)
+                console.log('error', error)
             })
     }
 
@@ -174,13 +192,7 @@ class createBlog extends Component {
                 })
                 break;
             // no default
-
         }
-
-        // var category = ['ss']
-        // category.push(event.target.value)
-        // console.log('ee',category)
-        // console.log('2',type)
     }
 
     render() {
@@ -195,16 +207,12 @@ class createBlog extends Component {
                 </div>
                 <div className="container center">
                     <div className="col-md-8">
-
-                        {!this.state.submitted &&
+                        {!this.state.postedBlog &&
                         this.renderPostBlogForm()
                         }
-                        {this.state.submitted &&
+                        {this.state.postedBlog &&
                         this.renderPostedBlog()
                         }
-
-                        {/*</div>*/}
-
                     </div>
                 </div>
             </div>
@@ -212,6 +220,13 @@ class createBlog extends Component {
     }
 }
 
-export default createBlog;
+
+export const mapStateToProps = state => {
+    return {
+        info: state.loginInfo,
+        submit: state.loginAuthenticate
+    }
+}
+export default connect(mapStateToProps)(createBlog);
 
 

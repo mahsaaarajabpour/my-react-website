@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import './Navbar.css'
 import $ from "jquery";
 import {connect} from "react-redux"
-import * as actionCreators from '../Store/actions/index'
+import * as actionCreators from '../../Store/actions'
 
 class navbar extends Component {
     componentDidMount() {

@@ -15,7 +15,7 @@ class pagination extends Component {
         const pId = Number(this.props.pageId) - 1;
         if (this.props.pageCount) {
             if (Number(this.props.pageId) === 1) {
-                return <NavLink id="prevBtn" className="disabled-prevBtn " to={"/portfolio/" + pId}>
+                return <NavLink id="prevBtn" className="disabled-Btn " to={"/portfolio/" + pId}>
                     <i className="fas fa-angle-double-left"></i>
                 </NavLink>
             } else {
@@ -43,7 +43,7 @@ class pagination extends Component {
         const pId = Number(this.props.pageId) + 1;
         if (this.props.pageCount) {
             if (Number(this.props.pageId) >= this.props.pageCount) { //disable next-btn
-                return <NavLink id="nextBtn" className="disabled-nextBtn" to={"/portfolio/" + pId}>
+                return <NavLink id="nextBtn" className="disabled-Btn" to={"/portfolio/" + pId}>
                     <i className="fas fa-angle-double-right"></i>
                 </NavLink>
             } else {// enable next-btn

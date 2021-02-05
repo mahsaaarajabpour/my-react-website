@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import faker from 'faker/locale/en'
 import './Blogs.css'
 import axios from "axios";
+import './Blog/Blog.css'
 
 class Blogs extends Component {
     constructor(props) {
@@ -119,7 +120,7 @@ class Blogs extends Component {
         const pId = Number(this.props.match.params.id) - 1;
         if (this.state.blogPageCount) {
             if (Number(this.props.match.params.id) === 1) {
-                return <NavLink id="prevBtn" className="disabled-prevBtn " to={"/blogs/" + pId}>
+                return <NavLink id="prevBtn" className="disabled-Btn" to={"/blogs/" + pId}>
                     <i className="fas fa-angle-double-left"></i>
                 </NavLink>
             } else {
@@ -147,7 +148,7 @@ class Blogs extends Component {
         const pId = Number(this.props.match.params.id) + 1;
         if (this.state.blogPageCount) {
             if (Number(this.props.match.params.id) >= this.state.blogPageCount) { //disable next-btn
-                return <NavLink id="nextBtn" className="disabled-nextBtn" to={"/blogs/" + pId}><i
+                return <NavLink id="nextBtn" className="disabled-Btn" to={"/blogs/" + pId}><i
                     className="fas fa-angle-double-right"></i>
                 </NavLink>
             } else {// enable next-btn
@@ -184,13 +185,19 @@ class Blogs extends Component {
                     </pre>
                 </div>
                 <div className="container ">
+                    <div className="search-panel">
+                        <div className="search-bar d-flex justify-content-center">
+                            <input className="col-md-6 col-sm-8" type="text"/>
+                            <button className="my-btn"><i className="fas fa-search"></i></button>
+                        </div>
+                    </div>
                     <div className="row blogs-header justify-content-between">
                         <h5><NavLink to={{
                             pathname: '/create-blog',
                             state: {
                                 paramsId: this.props.match.params.id,
                             }
-                        }}>click to create new blog</NavLink></h5>
+                        }}><i className="fas fa-edit"></i>click to create new blog</NavLink></h5>
                         <p>page {this.props.match.params.id} of {this.state.blogPageCount}</p>
                     </div>
                     <div className="row blogs-content">

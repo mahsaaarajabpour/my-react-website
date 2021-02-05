@@ -1,0 +1,36 @@
+.login .form-header{
+    border-radius:10px 10px 0 0;
+    background-color: #c7f1e240;
+    border-bottom: 1px solid #8e8e8e2b;
+    padding: 1rem 1rem 1rem 2rem;
+}
+.login .form-header p{
+    padding: 0;
+    margin: 0;
+}
+
+.login .login-body {
+    margin: 10px;
+    padding: 40px 20px;
+}
+
+.login input {
+    background-color: #f6f6f6;
+    border-radius: 6px;
+    text-align: center;
+    outline: none;
+    height: 3.25rem;
+}
+
+.login .form-footer {
+    padding: 30px 0;
+    background-color: #f6f6f6;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #dce8f1;
+    border-radius: 0 0 10px 10px;
+}
+
+.login .form-footer a {
+    text-decoration: none;
+}

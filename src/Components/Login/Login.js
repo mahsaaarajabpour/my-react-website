@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import Slider from "../Slider/Slider";
 import {connect} from "react-redux"
 import axios from "axios";
-import * as actionCreators from '../Store/actions/index'
+import * as actionCreators from '../../Store/actions'
 
 class login extends Component {
     constructor() {
@@ -56,7 +56,6 @@ class login extends Component {
                         this.setState({emailVerify: true})
                         if (response.data[key].password.toString() === this.state.users.password) {
                             this.setState({passVerify: true})
-                            // this.setState({submit: true})
                             this.setState({userInfo: response.data[key]})
                             this.props.onLogin(this.state.userInfo)
                         }
@@ -73,12 +72,7 @@ class login extends Component {
         )
     }
 
-    // logOut = () => {
-    //     return this.setState({submit: false})
-    // }
-
     renderLoginForm() {
-        // console.log('dd',this.state.emailVerify )
         return (
             <div className="col-lg-6 col-md-6 col-sm-10 p-0 main-form">
                 <div className="form-header ">

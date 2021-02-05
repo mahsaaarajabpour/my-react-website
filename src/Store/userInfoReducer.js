@@ -22,7 +22,10 @@ const reducer = (state = initialState, action) => {
             return (
                 updateObject(
                     state,
-                    {loginAuthenticate: false}
+                    {
+                        loginAuthenticate: false,
+                        loginInfo: []
+                    }
                 )
             )
     }

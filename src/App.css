@@ -1,12 +1,49 @@
-/*html,body{*/
-/*  height: 100%;*/
-/*  margin: 0;*/
-/*}*/
-/*body{*/
-/*  min-height:100%;*/
-/*  !*position:relative;*!*/
-/*  !*padding-bottom:[footer-height]*!*/
-/*}*/
+
+.main-form {
+    margin: 80px 0;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 12px 27px 0 #c7c4c4;
+}
+.entry {
+    margin-bottom: 50px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.welcome-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 80px 0;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 12px 27px 0 #c7c4c4;
+    background-color: #f2f7f6;
+    line-height: 3;
+    padding: .5rem;
+}
+.errorMessage {
+    color: red;
+    font-size: .8rem;
+}
+
+.error {
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+.entry {
+    margin-bottom: 50px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
 .wrapper {
     min-height: 100%;
 }
@@ -140,8 +177,7 @@
 }
 
 
-.m-pagination .prev .disabled-prevBtn,
-.m-pagination .next .disabled-nextBtn {
+.disabled-Btn {
     cursor: default;
     pointer-events: none;
 }

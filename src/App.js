@@ -1,39 +1,67 @@
-import React, {Component} from 'react'
-import {BrowserRouter, Route} from "react-router-dom";
-
+import React, {Component, Suspense} from 'react'
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import './App.css';
-import Footer from './Footer/Footer'
-import Navbar from './Navbar/Navbar'
-import Blogs from './Blogs/Blogs'
-import Portfolio from './Portfolio/Portfolio'
-import Login from './Login/Login'
-import SignUp from './SignUp/SignUp'
-import Contact from './Contact/Contact'
-import Blog from "./Blogs/Blog/Blog";
-import CreateBlog from "./Blogs/CreateBlog/CreateBlog"
-// import Home from "./Home/Home"
+import Footer from './Components/Footer/Footer'
+import Navbar from './Components/Navbar/Navbar'
+
+const Contact = React.lazy(() => import ('./Components/Contact/Contact'))
+const SignUp = React.lazy(() => import('./Components/SignUp/SignUp'))
+const CreateBlog = React.lazy(() => import('./Components/Blogs/CreateBlog/CreateBlog'))
+const BLog = React.lazy(() => import('./Components/Blogs/Blog/Blog'))
+const Portfolio = React.lazy(() => import('./Components/Portfolio/Portfolio'))
+const Blogs = React.lazy(() => import('./Components/Blogs/Blogs'))
+const Login = React.lazy(() => import('./Components/Login/Login'))
 
 class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div className="wrapper">
-                    <Navbar/>
-                    <div className="">
-                        {/*<Route component={Home} path="/" exact/>*/}
-                        <Route component={Login} path="/" exact/>
-                        <Route component={Portfolio} path="/portfolio" exact/>
-                        <Route component={Portfolio} path="/portfolio/:id" exact/>
-                        <Route component={SignUp} path="/sign-up" exact/>
-                        <Route component={Contact} path="/contact" exact/>
-                        <Route component={Blogs} path="/blogs" exact/>
-                        <Route component={Blogs} path="/blogs/:id" exact/>
-                        <Route component={Blog} path="/blog/:id"/>
-                        <Route component={CreateBlog} path="/create-blog"/>
+                <React.Fragment>
+                    <div className="wrapper">
+                        <Navbar/>
+                        <div className="">
+                            <Switch>
+                                <Route exact path="/"
+                                       render={() =>
+                                           <Suspense fallback={<div>loading</div>}>
+                                               <Login/>
+                                           </Suspense>}/>
 
+                                <Route exact path="/portfolio/:id" render={(props =>
+                                    <Suspense fallback={<div>loading</div>}>
+                                        <Portfolio {...props} />
+                                    </Suspense>)}/>
+
+                                <Route path="/sign-up" exact
+                                       render={() => <Suspense fallback={<div>loading</div>}>
+                                           <SignUp/>
+                                       </Suspense>}/>
+
+                                <Route path="/contact" exact
+                                       render={() => <Suspense fallback={<div>loading</div>}>
+                                           <Contact/>
+                                       </Suspense>}/>
+
+                                <Route path="/blogs/:id" exact
+                                       render={(props) => <Suspense fallback={<div>loading</div>}>
+                                           <Blogs {...props} />
+                                       </Suspense>}/>
+
+                                <Route exact path="/blog/:id"
+                                       render={props => <Suspense fallback={<div>loading</div>}>
+                                           <BLog {...props}/>
+                                       </Suspense>}/>
+
+                                <Route exact path="/create-blog"
+                                       render={(props) => <Suspense fallback={<div>loading</div>}>
+                                           <CreateBlog {...props}/>
+                                       </Suspense>}
+                                />
+                            </Switch>
+                        </div>
+                        <Footer/>
                     </div>
-                    <Footer/>
-                </div>
+                </React.Fragment>
             </BrowserRouter>
         )
     }
