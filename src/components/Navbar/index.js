@@ -55,6 +55,9 @@ class navbar extends Component {
                             <NavLink className="nav-link" to="/blogs/1">Blogs</NavLink>
                         </li>
                         <li className="nav-item">
+                            <NavLink className="nav-link" to="/create-blog">Add Blog</NavLink>
+                        </li>
+                        <li className="nav-item">
                             <NavLink className="nav-link" to="/contact">Contact</NavLink>
                         </li>
                     </ul>

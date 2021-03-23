@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './Login.css'
 import {NavLink} from "react-router-dom";
-import Slider from "../Slider/Slider";
+import Slider from "../Slider";
 import {connect} from "react-redux"
 import axios from "axios";
 import * as actionCreators from '../../Store/actions'

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Pagination from './Pagination/Pagination'
+import Pagination from './Pagination'
 import {NavLink, Route} from "react-router-dom";
 import faker from 'faker/locale/en'
 import './Portfolio.css'

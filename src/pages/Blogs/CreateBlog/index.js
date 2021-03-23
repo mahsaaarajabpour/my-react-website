@@ -93,12 +93,8 @@ class createBlog extends Component {
                             <p className="d-inline-block">{this.state.newBlog.content}</p>
                         </div>
                         <div className="">
-                            <label className="m-0  pb-2">categories :</label><span className="pr-3"></span>
-                            {this.state.newBlog.categories.map((category, index) => {
-                                return <p className="d-inline-block" key={index}>{category},
-                                    <span className="pr-1"></span>
-                                </p>
-                            })}
+                            <label className="m-0 pb-2">categories :</label><span className="pr-3"></span>
+                            <p className="d-inline-block"> {this.state.newBlog.categories.join(', ')} </p>
                         </div>
                     </div>
                     {!this.props.submit &&
@@ -200,9 +196,9 @@ class createBlog extends Component {
             <div className="create-blog">
                 <div className="title">
                     <p>Create Blog</p>
-                    <pre>
-                        <NavLink to="/">Home</NavLink>   /   <NavLink
-                        to={"/blogs/" + this.props.location.state.paramsId}>Blogs</NavLink>
+                    <pre><NavLink to="/">Home</NavLink>   /   {this.props.location.state===null ?<p>jh</p> :
+                        <NavLink to={"/blogs/" + this.props.location.state.paramsId}>Blogs</NavLink>
+                        }
                     </pre>
                 </div>
                 <div className="container center">

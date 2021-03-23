@@ -14,6 +14,7 @@ class Blogs extends Component {
             blogPageCount: null,
             checked: false,
             pageSize: 6,
+            searchInput: ''
         }
     }
 
@@ -187,7 +188,11 @@ class Blogs extends Component {
                 <div className="container ">
                     <div className="search-panel">
                         <div className="search-bar d-flex justify-content-center">
-                            <input className="col-md-6 col-sm-8" type="text"/>
+                            <input className="col-md-6 col-sm-8"
+                                   type="text"
+                                   placeholder="search your blog"
+                                   onChange={event => this.setState({searchInput: event.target.value})}
+                            />
                             <button className="my-btn"><i className="fas fa-search"></i></button>
                         </div>
                     </div>
