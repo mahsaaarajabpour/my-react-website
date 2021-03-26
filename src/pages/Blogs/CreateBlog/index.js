@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import './CreateBlog.css'
 import axios from "axios";
 import {connect} from 'react-redux'
+import PageHOC from "../../../components/PageHOC";
 
 class createBlog extends Component {
     constructor() {
@@ -193,26 +194,29 @@ class createBlog extends Component {
 
     render() {
         return (
-            <div className="create-blog">
-                <div className="title">
-                    <p>Create Blog</p>
-                    <pre><NavLink to="/">Home</NavLink>   /   {this.props.location.state===null ?<p>jh</p> :
-                        <NavLink to={"/blogs/" + this.props.location.state.paramsId}>Blogs</NavLink>
+            <PageHOC>
+                <div className="create-blog">
+                    <div className="title">
+                        <p>Create Blog</p>
+                        <pre><NavLink to="/">Home</NavLink>   /   {this.props.location.state===null ?<p>jh</p> :
+                            <NavLink to={"/blogs/" + this.props.location.state.paramsId}>Blogs</NavLink>
                         }
                     </pre>
-                </div>
-                <div className="container center">
-                    <div className="col-md-8">
-                        {!this.state.postedBlog &&
-                        this.renderPostBlogForm()
-                        }
-                        {this.state.postedBlog &&
-                        this.renderPostedBlog()
-                        }
+                    </div>
+                    <div className="container center">
+                        <div className="col-md-8">
+                            {!this.state.postedBlog &&
+                            this.renderPostBlogForm()
+                            }
+                            {this.state.postedBlog &&
+                            this.renderPostedBlog()
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
+            </PageHOC>
         )
+
     }
 }
 

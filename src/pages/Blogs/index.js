@@ -4,6 +4,7 @@ import faker from 'faker/locale/en'
 import './Blogs.css'
 import axios from "axios";
 import './Blog/Blog.css'
+import PageHOC from "../../components/PageHOC";
 
 class Blogs extends Component {
     constructor(props) {
@@ -178,41 +179,43 @@ class Blogs extends Component {
 
     render() {
         return (
-            <div className="blogs-view">
-                <div className="title">
-                    <p>Blogs</p>
-                    <pre>
+            <PageHOC>
+                <div className="blogs-view">
+                    <div className="title">
+                        <p>Blogs</p>
+                        <pre>
                         <NavLink to="/">Home</NavLink>   /   Blogs
                     </pre>
-                </div>
-                <div className="container ">
-                    <div className="search-panel">
-                        <div className="search-bar d-flex justify-content-center">
-                            <input className="col-md-6 col-sm-8"
-                                   type="text"
-                                   placeholder="search your blog"
-                                   onChange={event => this.setState({searchInput: event.target.value})}
-                            />
-                            <button className="my-btn"><i className="fas fa-search"></i></button>
+                    </div>
+                    <div className="container ">
+                        <div className="search-panel">
+                            <div className="search-bar d-flex justify-content-center">
+                                <input className="col-md-6 col-sm-8"
+                                       type="text"
+                                       placeholder="search your blog"
+                                       onChange={event => this.setState({searchInput: event.target.value})}
+                                />
+                                <button className="my-btn"><i className="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        <div className="row blogs-header justify-content-between">
+                            <h5><NavLink to={{
+                                pathname: '/create-blog',
+                                state: {
+                                    paramsId: this.props.match.params.id,
+                                }
+                            }}><i className="fas fa-edit"></i>click to create new blog</NavLink></h5>
+                            <p>page {this.props.match.params.id} of {this.state.blogPageCount}</p>
+                        </div>
+                        <div className="row blogs-content">
+                            {this.renderBlogs()}
+                        </div>
+                        <div className="row blogs-footer ">
+                            {this.renderPagination()}
                         </div>
                     </div>
-                    <div className="row blogs-header justify-content-between">
-                        <h5><NavLink to={{
-                            pathname: '/create-blog',
-                            state: {
-                                paramsId: this.props.match.params.id,
-                            }
-                        }}><i className="fas fa-edit"></i>click to create new blog</NavLink></h5>
-                        <p>page {this.props.match.params.id} of {this.state.blogPageCount}</p>
-                    </div>
-                    <div className="row blogs-content">
-                        {this.renderBlogs()}
-                    </div>
-                    <div className="row blogs-footer ">
-                        {this.renderPagination()}
-                    </div>
                 </div>
-            </div>
+            </PageHOC>
         )
     }
 }

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {NavLink} from "react-router-dom";
 import './SignUp.css'
 import axios from "axios";
+import PageHOC from "../../components/PageHOC";
 
 class signUp extends Component {
     constructor() {
@@ -102,86 +103,90 @@ class signUp extends Component {
 
     renderSignUpForm() {
         return (
-            <div className="container sign-up">
-                <div className="col-lg-6 col-md-6 col-sm-10 main-form ">
-                    {this.state.emailError &&
-                    <p className="alert-danger text-center text-danger">email error</p>
-                    }
-                    <form className="m-3" onSubmit={this.signUp}>
-                        {/*firstname*/}
-                        <div className="form-group input-group">
-                            <div className="fix-input-icon">
-                                <span className="input-icon"> <i className="fa fa-user"></i> </span>
+            <PageHOC>
+                <div className="container sign-up">
+                    <div className="col-lg-6 col-md-6 col-sm-10 main-form ">
+                        {this.state.emailError &&
+                        <p className="alert-danger text-center text-danger">email error</p>
+                        }
+                        <form className="m-3" onSubmit={this.signUp}>
+                            {/*firstname*/}
+                            <div className="form-group input-group">
+                                <div className="fix-input-icon">
+                                    <span className="input-icon"> <i className="fa fa-user"></i> </span>
+                                </div>
+                                <input className="form-control"
+                                       placeholder="first name"
+                                       type="text"
+                                       onChange={event => this.handleChange(event, 'name')}
+                                       required
+                                />
                             </div>
-                            <input className="form-control"
-                                   placeholder="first name"
-                                   type="text"
-                                   onChange={event => this.handleChange(event, 'name')}
-                                   required
-                            />
-                        </div>
-                        {/*lastname */}
-                        <div className="form-group input-group">
-                            <div className="fix-input-icon">
-                                <span className="input-icon"> <i className="fa fa-user"></i> </span>
+                            {/*lastname */}
+                            <div className="form-group input-group">
+                                <div className="fix-input-icon">
+                                    <span className="input-icon"> <i className="fa fa-user"></i> </span>
+                                </div>
+                                <input className="form-control"
+                                       placeholder="last name"
+                                       type="text"
+                                       onChange={event => this.handleChange(event, 'lastName')}
+                                       required
+                                />
                             </div>
-                            <input className="form-control"
-                                   placeholder="last name"
-                                   type="text"
-                                   onChange={event => this.handleChange(event, 'lastName')}
-                                   required
-                            />
-                        </div>
-                        {/*email*/}
-                        <div className="form-group input-group">
-                            <div className="fix-input-icon">
-                                <span className="input-icon"> <i className="fa fa-envelope"></i> </span>
+                            {/*email*/}
+                            <div className="form-group input-group">
+                                <div className="fix-input-icon">
+                                    <span className="input-icon"> <i className="fa fa-envelope"></i> </span>
+                                </div>
+                                <input className="form-control"
+                                       placeholder="Email address"
+                                       type="email"
+                                       onChange={event => this.handleChange(event, 'email')}
+                                       required
+                                />
                             </div>
-                            <input className="form-control"
-                                   placeholder="Email address"
-                                   type="email"
-                                   onChange={event => this.handleChange(event, 'email')}
-                                   required
-                            />
-                        </div>
-                        {/*password*/}
-                        <div className="form-group input-group">
-                            <div className="fix-input-icon">
-                                <span className="input-icon"> <i className="fa fa-lock"></i> </span>
+                            {/*password*/}
+                            <div className="form-group input-group">
+                                <div className="fix-input-icon">
+                                    <span className="input-icon"> <i className="fa fa-lock"></i> </span>
+                                </div>
+                                <input className="form-control"
+                                       placeholder="Create password"
+                                       type="password"
+                                       onChange={event => this.handleChange(event, 'password')}
+                                       required
+                                />
                             </div>
-                            <input className="form-control"
-                                   placeholder="Create password"
-                                   type="password"
-                                   onChange={event => this.handleChange(event, 'password')}
-                                   required
-                            />
-                        </div>
-                        {/*create-account-btn*/}
-                        <div className="form-group">
-                            <button type="submit" className="btn-block my-btn"> Create Account</button>
-                        </div>
+                            {/*create-account-btn*/}
+                            <div className="form-group">
+                                <button type="submit" className="btn-block my-btn"> Create Account</button>
+                            </div>
 
-                        <p className="text-center">Have an account?
-                            <NavLink to="/">Log In</NavLink>
-                        </p>
-                    </form>
+                            <p className="text-center">Have an account?
+                                <NavLink to="/">Log In</NavLink>
+                            </p>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </PageHOC>
         )
     }
 
     renderWelcomeForm() {
         return (
-            <div className="container center sign-up">
-                <div className="col-lg-6 col-md-6 col-sm-10 welcome-form">
-                    <div className="p-0 ">
-                        <p className="text-center m-0">hi {this.state.users.name} </p>
-                    </div>
-                    <div>
-                        <button className="my-btn" onClick={this.logOut}>log out</button>
+            <PageHOC>
+                <div className="container center sign-up">
+                    <div className="col-lg-6 col-md-6 col-sm-10 welcome-form">
+                        <div className="p-0 ">
+                            <p className="text-center m-0">hi {this.state.users.name} </p>
+                        </div>
+                        <div>
+                            <button className="my-btn" onClick={this.logOut}>log out</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </PageHOC>
         )
     }
 

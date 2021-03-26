@@ -5,6 +5,7 @@ import Slider from "../Slider";
 import {connect} from "react-redux"
 import axios from "axios";
 import * as actionCreators from '../../Store/actions'
+import PageHOC from "../../components/PageHOC";
 
 class login extends Component {
     constructor() {
@@ -94,7 +95,7 @@ class login extends Component {
 
                         {/*// <!--password-->*/}
                         <div className="form-group input-group">
-                            <input className="form-control" type="text"
+                            <input className="form-control" type="password"
                                    placeholder="password"
                                    onChange={event => this.handleChange(event, 'password')}
                                    required
@@ -136,12 +137,12 @@ class login extends Component {
             loginForm = this.renderWelcomeFrom()
         }
         return (
-            <div>
+            <PageHOC>
                 <Slider/>
                 <div className="container login center">
                     {loginForm}
                 </div>
-            </div>
+            </PageHOC>
         )
     }
 }
