@@ -1,38 +1,31 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import {NavLink} from "react-router-dom";
 import './CreateBlog.css'
 import axios from "axios";
 import {connect} from 'react-redux'
 import PageHOC from "../../../components/PageHOC";
 
-class createBlog extends Component {
-    constructor() {
-        super();
-        this.state = {
-            newBlog: {
-                title: '',
-                content: '',
-                categories: [],
-            },
-            postedBlog: false,
-        }
-    }
+function CreateBlog (props){
 
-    renderPostBlogForm() {
+    const [postedBlog,setPostedBlog]=useState(false)
+    const [newBlog,setNewBlog]=useState({title:'',content:'',categories:[]})
+
+
+    function renderPostBlogForm() {
         return (
             <div className="row main-form  d-flex justify-content-center">
-                <form className="col-md-10 create-blog-body" onSubmit={this.postBlog}>
+                <form className="col-md-10 create-blog-body" onSubmit={postBlog}>
                     <div className="pb-3">
                         <input type="text"
                                className="form-control"
                                placeholder="title"
-                               onChange={event => this.handleChange(event, 'title')}
+                               onChange={event => handleChange(event, 'title')}
                         />
                     </div>
                     <div className="pb-3">
                                     <textarea className="form-control" cols="30" rows="7"
                                               placeholder="please enter your content"
-                                              onChange={event => this.handleChange(event, 'content')}
+                                              onChange={event => handleChange(event, 'content')}
                                     ></textarea>
                     </div>
                     <div className="pb-3">
@@ -41,35 +34,35 @@ class createBlog extends Component {
                             <label>
                                 <input type="checkbox"
                                        name="front-end"
-                                       onChange={event => this.handleChange(event, 'categories')}
+                                       onChange={event => handleChange(event, 'categories')}
                                 />
                                 <span className="label-text">front-end</span>
                             </label>
                             <label>
                                 <input type="checkbox"
                                        name="back-end"
-                                       onChange={event => this.handleChange(event, 'categories')}
+                                       onChange={event => handleChange(event, 'categories')}
                                 /> <span
                                 className="label-text">back-end</span>
                             </label>
                             <label>
                                 <input type="checkbox"
                                        name="react.js"
-                                       onChange={event => this.handleChange(event, 'categories')}
+                                       onChange={event => handleChange(event, 'categories')}
                                 /> <span
                                 className="label-text">react.js</span>
                             </label>
                             <label>
                                 <input type="checkbox"
                                        name="seo"
-                                       onChange={event => this.handleChange(event, 'categories')}
+                                       onChange={event => handleChange(event, 'categories')}
                                 /> <span
                                 className="label-text">seo</span>
                             </label>
                             <label>
                                 <input type="checkbox"
                                        name="vue.js"
-                                       onChange={event => this.handleChange(event, 'categories')}
+                                       onChange={event => handleChange(event, 'categories')}
                                 /> <span
                                 className="label-text">vue.js</span>
                             </label>
@@ -79,26 +72,26 @@ class createBlog extends Component {
                     <hr/>
                     <div className="main-form p-4">
                         <h4 className="mb-5">Preview</h4>
-                        {this.props.submit &&
+                        {props.submit &&
                         <div className="">
                             <label className="m-0  pb-2">writer :</label><span className="pr-3"></span>
-                            <p className="d-inline-block">{this.props.info.name + ' ' + this.props.info.lastName}</p>
+                            <p className="d-inline-block">{props.info.name + ' ' + props.info.lastName}</p>
                         </div>
                         }
                         <div className="">
                             <label className="m-0  pb-2">title :</label><span className="pr-3"></span>
-                            <p className="d-inline-block">{this.state.newBlog.title}</p>
+                            <p className="d-inline-block">{newBlog.title}</p>
                         </div>
                         <div className="">
                             <label className="m-0  pb-2">content :</label><span className="pr-3"></span>
-                            <p className="d-inline-block">{this.state.newBlog.content}</p>
+                            <p className="d-inline-block">{newBlog.content}</p>
                         </div>
                         <div className="">
                             <label className="m-0 pb-2">categories :</label><span className="pr-3"></span>
-                            <p className="d-inline-block"> {this.state.newBlog.categories.join(', ')} </p>
+                            <p className="d-inline-block"> {newBlog.categories.join(', ')} </p>
                         </div>
                     </div>
-                    {!this.props.submit &&
+                    {!props.submit &&
                     <div>
                         <div className="row justify-content-center">
                             <button type="submit" className="my-btn pr-5 pl-5 font-weight-bold disabled-Btn">post
@@ -109,7 +102,7 @@ class createBlog extends Component {
                         </div>
                     </div>
                     }
-                    {this.props.submit &&
+                    {props.submit &&
                     <div className="row justify-content-center">
                         <button type="submit" className="my-btn pr-5 pl-5 font-weight-bold">post</button>
                     </div>
@@ -120,7 +113,7 @@ class createBlog extends Component {
         )
     }
 
-    renderPostedBlog() {
+    function renderPostedBlog() {
         return (
             <div className="row main-form center alert-success">
                 <div className="col-md-8 create-blog-body  ">
@@ -133,91 +126,81 @@ class createBlog extends Component {
         )
     }
 
-    postBlog = (event) => {
+    const postBlog = (event) => {
         event.preventDefault();
-        let  array= {...this.state.newBlog}
-        array.writer=this.props.info.name + ' ' +this.props.info.lastName
-        this.setState({newBlog:array})
+        let array = {...newBlog}
+        array.writer = props.info.name + ' ' + props.info.lastName
+        setNewBlog(array)
         axios.post("https://my-shop-react-cdca2-default-rtdb.firebaseio.com/blog.json", array)
             .then(response => {
                 console.log('response', response)
-                this.setState({postedBlog: true})
+                setPostedBlog(true)
             })
             .catch(error => {
                 console.log('error', error)
             })
     }
 
-    handleChange(event, type) {
+    function handleChange(event, type) {
         switch (type) {
             case 'title':
-                this.setState({
-                    newBlog: {
-                        ...this.state.newBlog,
+                setNewBlog({
+                        ...newBlog,
                         title: event.target.value
-                    }
                 })
                 break;
             case 'content':
-                this.setState({
-                    newBlog: {
-                        ...this.state.newBlog,
+                setNewBlog({
+                        ...newBlog,
                         content: event.target.value
                     }
-                })
+                )
                 break;
             case 'categories':
                 if (event.target.checked) {
-                    let blog = {...this.state.newBlog}
+                    let blog = {...newBlog}
                     blog.categories.push(event.target.name)
-                    this.setState({newBlog: blog})
+                    setNewBlog(blog)
                 } else {
-                    let blog = {...this.state.newBlog}
+                    let blog = {...newBlog}
                     const index = blog.categories.indexOf(event.target.name);
                     blog.categories.splice(index, 1)
-                    this.setState({
-                        newBlog: blog
-                    })
+                    setNewBlog(blog)
                 }
                 break;
             case 'writer':
-                this.setState({
-                    newBlog: {
-                        ...this.state.newBlog,
+                setNewBlog({
+                        ...newBlog,
                         writer: event.target.value
-                    },
                 })
                 break;
             // no default
         }
     }
 
-    render() {
-        return (
-            <PageHOC>
-                <div className="create-blog">
-                    <div className="title">
-                        <p>Create Blog</p>
-                        <pre><NavLink to="/">Home</NavLink>   /   {this.props.location.state===null ?<p>jh</p> :
-                            <NavLink to={"/blogs/" + this.props.location.state.paramsId}>Blogs</NavLink>
-                        }
+    return (
+        <PageHOC>
+            <div className="create-blog">
+                <div className="title">
+                    <p>Create Blog</p>
+                    <pre><NavLink to="/">Home</NavLink>   / {props.location.state === null ? <p>jh</p> :
+                        <NavLink to={"/blogs/" + props.location.state.paramsId}>Blogs</NavLink>
+                    }
                     </pre>
-                    </div>
-                    <div className="container center">
-                        <div className="col-md-8">
-                            {!this.state.postedBlog &&
-                            this.renderPostBlogForm()
-                            }
-                            {this.state.postedBlog &&
-                            this.renderPostedBlog()
-                            }
-                        </div>
+                </div>
+                <div className="container center">
+                    <div className="col-md-8">
+                        {!postedBlog &&
+                        renderPostBlogForm()
+                        }
+                        {postedBlog &&
+                        renderPostedBlog()
+                        }
                     </div>
                 </div>
-            </PageHOC>
-        )
-
-    }
+            </div>
+        </PageHOC>
+    )
 }
 
 
@@ -227,6 +210,6 @@ export const mapStateToProps = state => {
         submit: state.loginAuthenticate
     }
 }
-export default connect(mapStateToProps)(createBlog);
+export default connect(mapStateToProps)(CreateBlog);
 
 
