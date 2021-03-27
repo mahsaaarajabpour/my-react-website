@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+// eslint-disable-next-line
+import React, {useState, useEffect, useRef} from 'react'
 import {NavLink} from "react-router-dom";
 import faker from 'faker/locale/en'
 import './Blogs.css'
@@ -6,51 +7,69 @@ import axios from "axios";
 import './Blog/Blog.css'
 import PageHOC from "../../components/PageHOC";
 
-class Blogs extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            blogs: [],
-            decreasedBlogs: [],
-            blogPageCount: null,
-            checked: false,
-            pageSize: 6,
-            searchInput: ''
-        }
-    }
+function Blogs(props) {
+    const [blogs, setBlogs] = useState([])
+    const [decreasedBlogs, setDecreasedBlogs] = useState([])
+    const [blogPageCount, setBlogPageCount] = useState(null)
+    const [checked, setChecked] = useState(false)
+    const [pageSize] = useState(6)
+    const [setSearchInput] = useState('')
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const nowPSize = this.props.match.params.id * this.state.pageSize;
-        const firstVideoNumArray = nowPSize - this.state.pageSize;
-        if (this.state.blogs.length !== 0) {
-            if (this.state.checked === false || prevProps.match.params.id !== this.props.match.params.id) {
-                const array = this.state.blogs.slice(firstVideoNumArray, nowPSize)
-                this.setState({decreasedBlogs: array, checked: true})
+    const prevFavRef = useRef();
+    useEffect(() => {
+        prevFavRef.current = props.match.params.id;
+    });
+    const prevPropsId = prevFavRef.current;
+
+    //*** set component is mounted or not ***//
+    const unMounted = useRef(false);
+    useEffect(() => {
+        return () => {
+            unMounted.current = true;
+            setBlogs([])
+        };
+    }, []);
+
+    // eslint-disable-next-line
+    useEffect(() => {
+        const nowPSize = props.match.params.id * pageSize;
+        const firstVideoNumArray = nowPSize - pageSize;
+        if (blogs.length !== 0) {
+            if (checked === false || prevPropsId !== props.match.params.id) {
+                const array = blogs.slice(firstVideoNumArray, nowPSize)
+                setDecreasedBlogs(array);
+                setChecked(true)
             }
         }
-    }
+    })
 
-    componentDidMount() {
+    // eslint-disable-next-line
+    useEffect(() => {
+            if (!unMounted.current) getBlogs();
+        },
+        // eslint-disable-next-line
+        [blogPageCount]);
+
+    function getBlogs() {
         axios.get('https://my-shop-react-cdca2-default-rtdb.firebaseio.com/blog.json')
             .then(res => {
                 for (let key in res.data) {
                     res.data[key].id = key
                 }
-                var result = Object.keys(res.data).map((key) => res.data[key]);
-                this.setState({blogs: result})
-
-                let page = Math.ceil(this.state.blogs.length / 6);
-                this.setState({blogPageCount: page})
+                const result = Object.keys(res.data).map((key) => res.data[key]);
+                setBlogs(result)
+                let page = Math.ceil(blogs.length / 6);
+                setBlogPageCount(page)
             })
             .catch(err => {
                 console.log(err)
             })
     }
 
-    renderBlogs() {
-        if (this.state.blogs.length !== 0) {
+    function renderBlogs() {
+        if (blogs.length !== 0) {
             return (
-                this.state.decreasedBlogs.map((blog, index) => {
+                decreasedBlogs.map((blog, index) => {
                     return (
                         <div className="col-md-4 blog" key={index}>
                             <div className="entry">
@@ -63,7 +82,7 @@ class Blogs extends Component {
                                             to={{
                                                 pathname: '/blog/' + blog.id,
                                                 state: {
-                                                    paramsId: this.props.match.params.id,
+                                                    paramsId: props.match.params.id,
                                                     blog: blog
                                                 }
                                             }}>
@@ -75,7 +94,7 @@ class Blogs extends Component {
                                             <NavLink to={{
                                                 pathname: '/blog/' + blog.id,
                                                 state: {
-                                                    paramsId: this.props.match.params.id,
+                                                    paramsId: props.match.params.id,
                                                     blog: blog
                                                 }
                                             }}>{blog.writer}</NavLink>
@@ -84,7 +103,7 @@ class Blogs extends Component {
                                             <NavLink to={{
                                                 pathname: '/blog/' + blog.id,
                                                 state: {
-                                                    paramsId: this.props.match.params.id,
+                                                    paramsId: props.match.params.id,
                                                     blog: blog
                                                 }
                                             }}>
@@ -98,7 +117,7 @@ class Blogs extends Component {
                                     <NavLink to={{
                                         pathname: '/blog/' + blog.id,
                                         state: {
-                                            paramsId: this.props.match.params.id,
+                                            paramsId: props.match.params.id,
                                             blog: blog
                                         }
                                     }} className="my-btn">read more</NavLink>
@@ -118,10 +137,10 @@ class Blogs extends Component {
         }
     }
 
-    renderPrevPage() {
-        const pId = Number(this.props.match.params.id) - 1;
-        if (this.state.blogPageCount) {
-            if (Number(this.props.match.params.id) === 1) {
+    function renderPrevPage() {
+        const pId = Number(props.match.params.id) - 1;
+        if (blogPageCount) {
+            if (Number(props.match.params.id) === 1) {
                 return <NavLink id="prevBtn" className="disabled-Btn" to={"/blogs/" + pId}>
                     <i className="fas fa-angle-double-left"></i>
                 </NavLink>
@@ -133,10 +152,10 @@ class Blogs extends Component {
         }
     }
 
-    renderLi() {
-        const j = this.state.blogPageCount;
+    function renderLi() {
+        const j = blogPageCount;
         let link = [];
-        if (this.state.blogPageCount !== null) {
+        if (blogPageCount !== null) {
             for (let i = 1; i <= j; i++) {
                 link.push(
                     <NavLink key={i} to={"/blogs/" + i}>{i}</NavLink>
@@ -146,10 +165,10 @@ class Blogs extends Component {
         }
     }
 
-    renderNextPage() {
-        const pId = Number(this.props.match.params.id) + 1;
-        if (this.state.blogPageCount) {
-            if (Number(this.props.match.params.id) >= this.state.blogPageCount) { //disable next-btn
+    function renderNextPage() {
+        const pId = Number(props.match.params.id) + 1;
+        if (blogPageCount) {
+            if (Number(props.match.params.id) >= blogPageCount) { //disable next-btn
                 return <NavLink id="nextBtn" className="disabled-Btn" to={"/blogs/" + pId}><i
                     className="fas fa-angle-double-right"></i>
                 </NavLink>
@@ -161,63 +180,61 @@ class Blogs extends Component {
         }
     }
 
-    renderPagination() {
+    function renderPagination() {
         return (
             <div className="m-pagination">
                 <div className="prev">
-                    {this.renderPrevPage()}
+                    {renderPrevPage()}
                 </div>
                 <div className="col col-md-6 center-page">
-                    {this.renderLi()}
+                    {renderLi()}
                 </div>
                 <div className="next">
-                    {this.renderNextPage()}
+                    {renderNextPage()}
                 </div>
             </div>
         )
     }
 
-    render() {
-        return (
-            <PageHOC>
-                <div className="blogs-view">
-                    <div className="title">
-                        <p>Blogs</p>
-                        <pre>
+    return (
+        <PageHOC>
+            <div className="blogs-view">
+                <div className="title">
+                    <p>Blogs</p>
+                    <pre>
                         <NavLink to="/">Home</NavLink>   /   Blogs
                     </pre>
+                </div>
+                <div className="container ">
+                    <div className="search-panel">
+                        <div className="search-bar d-flex justify-content-center">
+                            <input className="col-md-6 col-sm-8"
+                                   type="text"
+                                   placeholder="search your blog"
+                                   onChange={event => setSearchInput(event.target.value)}
+                            />
+                            <button className="my-btn"><i className="fas fa-search"></i></button>
+                        </div>
                     </div>
-                    <div className="container ">
-                        <div className="search-panel">
-                            <div className="search-bar d-flex justify-content-center">
-                                <input className="col-md-6 col-sm-8"
-                                       type="text"
-                                       placeholder="search your blog"
-                                       onChange={event => this.setState({searchInput: event.target.value})}
-                                />
-                                <button className="my-btn"><i className="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                        <div className="row blogs-header justify-content-between">
-                            <h5><NavLink to={{
-                                pathname: '/create-blog',
-                                state: {
-                                    paramsId: this.props.match.params.id,
-                                }
-                            }}><i className="fas fa-edit"></i>click to create new blog</NavLink></h5>
-                            <p>page {this.props.match.params.id} of {this.state.blogPageCount}</p>
-                        </div>
-                        <div className="row blogs-content">
-                            {this.renderBlogs()}
-                        </div>
-                        <div className="row blogs-footer ">
-                            {this.renderPagination()}
-                        </div>
+                    <div className="row blogs-header justify-content-between">
+                        <h5><NavLink to={{
+                            pathname: '/create-blog',
+                            state: {
+                                paramsId: props.match.params.id,
+                            }
+                        }}><i className="fas fa-edit"></i>click to create new blog</NavLink></h5>
+                        <p>page {props.match.params.id} of {blogPageCount}</p>
+                    </div>
+                    <div className="row blogs-content">
+                        {renderBlogs()}
+                    </div>
+                    <div className="row blogs-footer ">
+                        {renderPagination()}
                     </div>
                 </div>
-            </PageHOC>
-        )
-    }
+            </div>
+        </PageHOC>
+    )
 }
 
-export default Blogs
+export default Blogs;
