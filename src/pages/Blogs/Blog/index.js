@@ -1,31 +1,25 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import {NavLink} from "react-router-dom";
 import './Blog.css'
 import faker from 'faker/locale/en'
 import PageHOC from "../../../components/PageHOC";
 
 
-class Blog extends React.Component {
+function Blog(props){
+    const [blog]=useState(props.location.state.blog)
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            blog: this.props.location.state.blog
-        }
-    }
-
-    renderBlogCard() {
+    function renderBlogCard () {
         return (
             <article className="blog-card entry">
                 <img src={faker.image.image()}
                      alt="blog"
                      className="card-img"/>
                 <div className="article-body">
-                    <h2>{this.state.blog.title}</h2>
+                    <h2>{blog.title}</h2>
                     <ul className="row">
                         <li>
                             <i className="fas fa-user pr-1"></i>
-                            {this.state.blog.writer}
+                            {blog.writer}
                         </li>
                         <li>
                             <i className="far fa-clock pr-1"></i>
@@ -39,10 +33,10 @@ class Blog extends React.Component {
                         </li>
                     </ul>
                     <div className="article-content">
-                        <p>{this.state.blog.content}</p>
+                        <p>{blog.content}</p>
                         <hr/>
                         <ul className="row key-word"><i className="fas fa-tags pr-3"></i>
-                            {this.state.blog.categories.map((category, index) => {
+                            {blog.categories.map((category, index) => {
                                     return (
                                         <li key={index}> {category} </li>
                                     )
@@ -55,7 +49,7 @@ class Blog extends React.Component {
         )
     }
 
-    renderComments() {
+   function renderComments() {
         let comment = [];
         for (let i = 1; i <= 8; i++) {
             comment.push(
@@ -78,7 +72,7 @@ class Blog extends React.Component {
         return comment;
     }
 
-    renderReply() {
+   function renderReply() {
         return (
             <div className="container">
                 <h4>Leave a Reply</h4>
@@ -121,7 +115,7 @@ class Blog extends React.Component {
         )
     }
 
-    renderRecentPosts(){
+   function renderRecentPosts(){
         let recentPosts=[];
         for (let i=0;i<5;i++){
             recentPosts.push(
@@ -142,27 +136,26 @@ class Blog extends React.Component {
         return recentPosts
     }
 
-    render() {
         return (
             <PageHOC>
                 <div className="blog-view">
                     <div className="title">
-                        <p>{this.state.blog.title}</p>
+                        <p>{blog.title}</p>
                         <pre>
                         <NavLink to="/">Home</NavLink>   /   <NavLink
-                            to={"/blogs/" + this.props.location.state.paramsId}>Blogs</NavLink>
+                            to={"/blogs/" + props.location.state.paramsId}>Blogs</NavLink>
                     </pre>
                     </div>
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8">
-                                {this.renderBlogCard()}
+                                {renderBlogCard()}
                                 <div className="user-comments">
                                     <h4>8 comments</h4>
-                                    {this.renderComments()}
+                                    {renderComments()}
                                 </div>
                                 <div className="reply entry">
-                                    {this.renderReply()}
+                                    {renderReply()}
                                 </div>
                             </div>
                             <div className="col-lg-4">
@@ -186,7 +179,7 @@ class Blog extends React.Component {
                                     <div className="recent-posts">
                                         <h3>Recent Posts</h3>
                                         <ul>
-                                            {this.renderRecentPosts()}
+                                            {renderRecentPosts()}
                                         </ul>
                                     </div>
                                     <div className="tags">
@@ -211,7 +204,6 @@ class Blog extends React.Component {
                 </div>
             </PageHOC>
         )
-    }
 }
 
 export default Blog
