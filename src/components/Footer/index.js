@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React from 'react'
+import {ReactComponent as GitConnect} from '../../assets/image/gitconnected.svg'
 import './Footer.css'
 
-class index extends Component {
-    render() {
+function Footer (){
         return (
             <footer className="main-footer ">
                 <div className="row">
@@ -26,8 +26,9 @@ class index extends Component {
                                 </a>
                             </li>
                             <li>
-                                <a href="/">
-                                    <i className="fab fa-gitlab"></i>
+                                {/* eslint-disable-next-line react/jsx-no-target-blank */}
+                                <a target="_blank" href="https://gitconnected.com/mahsaaarajabpour">
+                                    <GitConnect className="git-connected"/>
                                 </a>
                             </li>
                             <li>
@@ -41,7 +42,8 @@ class index extends Component {
                                 </a>
                             </li>
                             <li>
-                                <a href="/">
+                                {/* eslint-disable-next-line react/jsx-no-target-blank */}
+                                <a target="_blank" href="https://www.linkedin.com/in/mahsaa-rajabpour-79806099/">
                                     <i className="fab fa-linkedin-in"></i>
                                 </a>
                             </li>
@@ -116,7 +118,6 @@ class index extends Component {
                 </div>
             </footer>
         )
-    }
 }
 
-export default index;
+export default Footer;

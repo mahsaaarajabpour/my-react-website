@@ -154,6 +154,13 @@ footer .row:first-child {
     font-size: 12px;
 }
 
+.git-connected{
+    width: 71%;
+    height: 21px;
+}
+.git-connected g{
+    fill: white;
+}
 @media (max-width: 400px) {
     .main-footer .row {
         padding: 4rem 1.5rem;
