@@ -61,7 +61,6 @@ function Login(props) {
                 </div>
                 <div className="center">
                     <form className="col-10 login-body" onSubmit={signIn}>
-                        {console.log('mahsa', emailVerify)}
                         {(emailVerify === false || emailVerify === false) &&
                         <p className="alert-danger text-center text-danger"> incorrect data </p>
                         }
