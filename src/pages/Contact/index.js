@@ -5,7 +5,7 @@ import axios from "axios";
 import PageHOC from "../../components/PageHOC";
 
 function Contact() {
-    const [messageAuth, setMessageAuth] = useState(false);
+    // const [, setMessageAuth] = useState(false);
     const [messageInfo, setMessageInfo] = useState({
         name: '', email: '', subject: '', message: ''
     });
@@ -48,7 +48,7 @@ function Contact() {
         Array.from(document.querySelectorAll("input")).forEach(
             (input) => (input.value = "")
         );
-        setMessageAuth(false)
+        // setMessageAuth(false)
     }
 
     //handle submit
@@ -57,7 +57,7 @@ function Contact() {
         axios.post('https://my-shop-react-cdca2-default-rtdb.firebaseio.com/contact.json', messageInfo)
             .then(response => {
                 console.log(response)
-                setMessageAuth(true)
+                // setMessageAuth(true)
                 InputEmpty()
             }).catch(error => {
             console.log(error)
@@ -129,7 +129,7 @@ function Contact() {
                             </div>
                             <div className="row send-message">
                                 <button type="submit" className="my-btn">Send Message</button>
-                                {messageAuth===true ? <p>your message has been send!</p> : <p>no</p>}
+                                {/*{messageAuth===true ? <p>your message has been send!</p> : <p>no</p>}*/}
                             </div>
                         </form>
                     </div>

@@ -183,7 +183,7 @@ function CreateBlog (props){
             <div className="create-blog">
                 <div className="title">
                     <p>Create Blog</p>
-                    <pre><NavLink to="/">Home</NavLink>   / {props.location.state === null ? <p>jh</p> :
+                    <pre><NavLink to="/">Home</NavLink>   / {props.location.state === null ? <p></p> :
                         <NavLink to={"/blogs/" + props.location.state.paramsId}>Blogs</NavLink>
                     }
                     </pre>
