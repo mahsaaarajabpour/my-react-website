@@ -1,3 +1,6 @@
+## NOTICE ##
+This project uses Firebase, so if it does not work in your country, please connect to vpn first.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
