@@ -4,12 +4,13 @@ import {NavLink} from "react-router-dom";
 import Slider from "../Slider";
 import {connect} from "react-redux"
 import axios from "axios";
-import * as actionCreators from '../../Store/actions'
+import * as actionCreators from '../../redux/UserInfo'
 import PageHOC from "../../components/PageHOC";
 
 function Login(props) {
 
     const [users, setUsers] = useState({email: '', password: null})
+    // eslint-disable-next-line
     const [userInfo, setUserInfo] = useState([])
     const [emailVerify, setEmailVerify] = useState(null)
     const [passVerify, setPassVerify] = useState(null)
@@ -39,7 +40,7 @@ function Login(props) {
                         if (response.data[key].password.toString() === users.password) {
                             setPassVerify(true)
                             setUserInfo(response.data[key])
-                            props.onLogin(userInfo)
+                            props.onLogin(response.data[key])
                         }
                     }
                 }
@@ -127,8 +128,8 @@ function Login(props) {
 
 const mapStateToProps = state => {
     return {
-        info: state.loginInfo,
-        submit: state.loginAuthenticate
+        info: state.userInfo.info,
+        submit: state.userInfo.authenticate
     }
 
 }

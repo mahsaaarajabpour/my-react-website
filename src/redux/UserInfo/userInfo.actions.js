@@ -1,7 +1,8 @@
-import * as actionTypes from './actionType'
+import * as actionTypes from './userInfo.actionType'
 
 export const userInfoLogin = (value) => {
     return dispatch => {
+        console.log('44',value)
         dispatch(
             saveInfo(value)
         )

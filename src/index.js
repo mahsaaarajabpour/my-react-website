@@ -8,13 +8,8 @@ import 'bootstrap/dist/js/bootstrap'
 import 'popper.js/dist/popper'
 import '@fortawesome/fontawesome-free/css/all.css'
 
-import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
-import userInfoReducer from "./Store/userInfoReducer";
-import thunk from "redux-thunk";
-
-const store = createStore(userInfoReducer, applyMiddleware(thunk))
-
+import store from "./redux/store";
 
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,

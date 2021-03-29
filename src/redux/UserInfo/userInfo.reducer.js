@@ -1,20 +1,19 @@
-import * as actionTypes from '../Store/actions/actionType'
+import * as actionTypes from './userInfo.actionType'
 import {updateObject} from './utility'
 
 const initialState = {
-    loginInfo: [],
-    loginAuthenticate: false,
+    info: [],
+    authenticate: false,
 }
 const reducer = (state = initialState, action) => {
-    // eslint-disable-next-line default-case
     switch (action.type) {
         case actionTypes.LOGIN:
             return (
                 updateObject(
                     state,
                     {
-                        loginInfo: JSON.parse(JSON.stringify(action.value)),
-                        loginAuthenticate: true
+                        info: JSON.parse(JSON.stringify(action.value)),
+                        authenticate: true
                     }
                 )
             )
@@ -23,11 +22,12 @@ const reducer = (state = initialState, action) => {
                 updateObject(
                     state,
                     {
-                        loginAuthenticate: false,
-                        loginInfo: []
+                        info: [],
+                        authenticate: false
                     }
                 )
             )
+        // no default
     }
     return state
 }

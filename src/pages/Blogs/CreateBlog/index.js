@@ -206,8 +206,8 @@ function CreateBlog (props){
 
 export const mapStateToProps = state => {
     return {
-        info: state.loginInfo,
-        submit: state.loginAuthenticate
+        info: state.userInfo.info,
+        submit: state.userInfo.authenticate
     }
 }
 export default connect(mapStateToProps)(CreateBlog);
