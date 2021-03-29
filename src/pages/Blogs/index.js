@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef,useCallback} from 'react'
 import {NavLink} from "react-router-dom";
 import faker from 'faker/locale/en'
 import './Blogs.css'
@@ -13,7 +13,11 @@ function Blogs(props) {
     const [blogPageCount, setBlogPageCount] = useState(null)
     const [checked, setChecked] = useState(false)
     const [pageSize] = useState(6)
-    const [setSearchInput] = useState('')
+    const [searchResults,setSearchResults] = useState([])
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
+
 
     const prevFavRef = useRef();
     useEffect(() => {
@@ -48,7 +52,8 @@ function Blogs(props) {
             if (!unMounted.current) getBlogs();
         },
         // eslint-disable-next-line
-        [blogPageCount]);
+        [blogPageCount]
+    );
 
     function getBlogs() {
         axios.get('https://my-shop-react-cdca2-default-rtdb.firebaseio.com/blog.json')
@@ -67,9 +72,12 @@ function Blogs(props) {
     }
 
     function renderBlogs() {
-        if (blogs.length !== 0) {
+        if (blogs.length !== 0 && !error) {
+            let showResult
+            if (searchResults.length>0) showResult=searchResults
+            else showResult=decreasedBlogs
             return (
-                decreasedBlogs.map((blog, index) => {
+                showResult.map((blog, index) => {
                     return (
                         <div className="col-md-4 blog" key={index}>
                             <div className="entry">
@@ -128,7 +136,8 @@ function Blogs(props) {
                 })
             )
         } else {
-            return (
+            if (error) return <div className="col mb-5"><p className="row justify-content-center">{error}</p></div>
+            else return (
                 <div className="col mb-5 loading">
                     <p className="row justify-content-center"><i className="fa fa-spinner fa-spin p-1"/> Loading ...</p>
                     <p className="row vpn">please connect to your vpn</p>
@@ -196,6 +205,37 @@ function Blogs(props) {
         )
     }
 
+    const searchBlogs=(input)=>{
+        setLoading(false);
+        if (input==='') {
+            setSearchResults([])
+            setError('')
+        }
+        else {
+            let search = blogs.filter(blog => blog.title.toLowerCase().includes(input))
+            if (search.length<=0) setError('there is no result')
+            else setError('')
+            setSearchResults(search)
+        }
+    }
+
+    const debounce = (fn,delay) => {
+        let inDebounce = null;
+        return args => {
+            clearTimeout(inDebounce);
+            inDebounce = setTimeout(() => fn(args), delay);
+            setLoading(true);
+        };
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const debouncedSave = (debounce((input)=>searchBlogs(input), 5000));
+
+    const handleChangeSearch = (event) => {
+        let input = event.target.value.toLowerCase().trim();
+        debouncedSave(input);
+    };
+
     return (
         <PageHOC>
             <div className="blogs-view">
@@ -209,12 +249,18 @@ function Blogs(props) {
                     <div className="search-panel">
                         <div className="search-bar d-flex justify-content-center">
                             <input className="col-md-6 col-sm-8"
+                                   id="search-bar-blogs"
                                    type="text"
                                    placeholder="search your blog"
-                                   onChange={event => setSearchInput(event.target.value)}
+                                   onChange={event => handleChangeSearch(event)}
                             />
-                            <button className="my-btn"><i className="fas fa-search"></i></button>
+                            {/*<button className="my-btn" onClick={searchBlogs}><i className="fas fa-search"></i></button>*/}
                         </div>
+                        {loading === true &&
+                        <div className="col mb-5 loading">
+                            <p className="row justify-content-center"><i className="fa fa-spinner fa-spin p-1"/> </p>
+                        </div>
+                        }
                     </div>
                     <div className="row blogs-header justify-content-between">
                         <h5><NavLink to={{

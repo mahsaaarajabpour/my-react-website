@@ -81,6 +81,17 @@
     white-space: nowrap;
 }
 
+
+.blogs-view .search-bar #search-bar-blogs{
+    border-radius: 6px;
+    border: 1px solid #0000004f;
+    padding: 10px;
+}
+
+.search-panel .search-bar #search-bar-blogs:focus {
+    outline: none;
+}
+
 /*/////*/
 .blogs-footer {
     padding: 15px;
