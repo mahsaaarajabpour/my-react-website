@@ -1,5 +1,5 @@
 import * as actionTypes from './userInfo.actionType'
-import {updateObject} from './utility'
+import {updateObject} from '../utility'
 
 const initialState = {
     info: [],

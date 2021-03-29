@@ -1,14 +1,15 @@
 import React, {useState} from 'react'
 import {NavLink} from "react-router-dom";
-import './SignUp.css'
-import axios from "axios";
 import PageHOC from "../../components/PageHOC";
+import axios from "axios";
+import * as actionCreators from "../../redux";
+import {connect} from "react-redux";
+import './SignUp.css'
 
-function SignUp() {
+function SignUp(props) {
 
     const [users, setUsers] = useState({name: '', lastName: '', email: '', password: null})
     const [emailError, setEmailError] = useState(false)
-    const [submit, setSubmit] = useState(false)
 
     const handleChange = (e, type) => {
         e.preventDefault();
@@ -29,7 +30,6 @@ function SignUp() {
         }
     }
 
-    //handleSubmit
     const signUp = (event) => {
         event.preventDefault();
         axios.get('https://my-shop-react-cdca2-default-rtdb.firebaseio.com/users.json')
@@ -46,7 +46,8 @@ function SignUp() {
                     axios.post('https://my-shop-react-cdca2-default-rtdb.firebaseio.com/users.json', users)
                         .then(response => {
                             if (response.data != null) {
-                                setSubmit(true)
+                                const userUpdate = {...users, id: response.data.name}
+                                props.onLogin(userUpdate)
                             }
                         })
                         .catch(error => {
@@ -57,10 +58,6 @@ function SignUp() {
             .catch(err => {
                 console.log(err)
             })
-    }
-
-    const logOut = () => {
-        return setSubmit(false)
     }
 
     const renderSignUpForm = () => {
@@ -141,10 +138,10 @@ function SignUp() {
                 <div className="container center sign-up">
                     <div className="col-lg-6 col-md-6 col-sm-10 welcome-form">
                         <div className="p-0 ">
-                            <p className="text-center m-0">hi {users.name} </p>
+                            <p className="text-center m-0">hi {props.info.name} </p>
                         </div>
                         <div>
-                            <button className="my-btn" onClick={logOut}>log out</button>
+                            <button className="my-btn" onClick={props.onLogOut}>log out</button>
                         </div>
                     </div>
                 </div>
@@ -153,7 +150,7 @@ function SignUp() {
     }
 
     let form = '';
-    if (!submit) {
+    if (!props.submit) {
         form = renderSignUpForm()
     } else {
         form = renderWelcomeForm()
@@ -161,4 +158,16 @@ function SignUp() {
     return form
 }
 
-export default SignUp;
+const mapStateToProps = state => {
+    return {
+        info: state.userInfo.info,
+        submit: state.userInfo.authenticate
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogin: (value) => dispatch(actionCreators.userInfoLogin(value)),
+        onLogOut: () => dispatch(actionCreators.userLogOut())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

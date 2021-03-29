@@ -3,9 +3,9 @@ import {NavLink} from "react-router-dom";
 import './Navbar.css'
 import $ from "jquery";
 import {connect} from "react-redux"
-import * as actionCreators from '../../redux/UserInfo'
+import * as actionCreators from '../../redux'
 
-function Navbar (props) {
+function Navbar(props) {
     useEffect(() => {
         return () => {
             $('.navbar-collapse').click('li', function () {
@@ -66,13 +66,13 @@ function Navbar (props) {
 
 const mapStateToProps = state => {
     return {
-        info: state.loginInfo,
-        submit: state.loginAuthenticate
+        info: state.userInfo.info,
+        submit: state.userInfo.authenticate
     }
 }
-const mapDispatchToProps=dispatch=>{
-    return{
-        onLogOut:()=>dispatch(actionCreators.userLogOut())
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogOut: () => dispatch(actionCreators.userLogOut())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import Slider from "../Slider";
 import {connect} from "react-redux"
 import axios from "axios";
-import * as actionCreators from '../../redux/UserInfo'
+import * as actionCreators from '../../redux'
 import PageHOC from "../../components/PageHOC";
 
 function Login(props) {
