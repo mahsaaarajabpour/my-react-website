@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import './Login.css'
 import {NavLink} from "react-router-dom";
 import Slider from "../Slider";
@@ -7,65 +7,45 @@ import axios from "axios";
 import * as actionCreators from '../../Store/actions'
 import PageHOC from "../../components/PageHOC";
 
-class login extends Component {
-    constructor() {
-        super();
-        this.state = {
-            users: {
-                email: '',
-                password: null
-            },
-            userInfo: [],
-            emailVerify: null,
-            passVerify: null,
-            error: false,
-            // submit: false,
-        }
-    }
+function Login(props) {
 
-    handleChange(e, type) {
+    const [users, setUsers] = useState({email: '', password: null})
+    const [userInfo, setUserInfo] = useState([])
+    const [emailVerify, setEmailVerify] = useState(null)
+    const [passVerify, setPassVerify] = useState(null)
+
+    function handleChange(e, type) {
         e.preventDefault();
         switch (type) {
             case "email":
-                this.setState({
-                    users: {
-                        ...this.state.users,
-                        email: e.target.value
-                    }
-                })
+                setUsers({...users, email: e.target.value})
                 break;
             case "password":
-                this.setState({
-                    users: {
-                        ...this.state.users,
-                        password: e.target.value
-                    }
-                })
+                setUsers({...users, password: e.target.value})
                 break;
             // no default
         }
     }
 
     //handleSubmit
-    signIn = (event) => {
+    function signIn(event) {
         event.preventDefault();
         axios.get('https://my-shop-react-cdca2-default-rtdb.firebaseio.com/users.json')
             .then(response => {
                 for (let key in response.data) {
                     response.data[key].id = key
-                    if (response.data[key].email === this.state.users.email) {
-                        this.setState({emailVerify: true})
-                        if (response.data[key].password.toString() === this.state.users.password) {
-                            this.setState({passVerify: true})
-                            this.setState({userInfo: response.data[key]})
-                            this.props.onLogin(this.state.userInfo)
+                    if (response.data[key].email === users.email) {
+                        setEmailVerify(true)
+                        if (response.data[key].password.toString() === users.password) {
+                            setPassVerify(true)
+                            setUserInfo(response.data[key])
+                            props.onLogin(userInfo)
                         }
                     }
                 }
-                if (!this.state.emailVerify || !this.state.passVerify) {
-                    this.setState({emailVerify: false})
-                    this.setState({passVerify: false})
-                    this.setState({error: true})
+                if (!emailVerify || !passVerify) {
+                    setEmailVerify(false)
+                    setPassVerify(false)
                 }
             }).catch(error => {
                 console.log(error)
@@ -73,22 +53,23 @@ class login extends Component {
         )
     }
 
-    renderLoginForm() {
+    function renderLoginForm() {
         return (
             <div className="col-lg-6 col-md-6 col-sm-10 p-0 main-form">
                 <div className="form-header ">
                     <p>Sign In</p>
                 </div>
                 <div className="center">
-                    <form className="col-10 login-body" onSubmit={this.signIn}>
-                        {(this.state.emailVerify === false || this.state.emailVerify === false) &&
+                    <form className="col-10 login-body" onSubmit={signIn}>
+                        {console.log('mahsa', emailVerify)}
+                        {(emailVerify === false || emailVerify === false) &&
                         <p className="alert-danger text-center text-danger"> incorrect data </p>
                         }
                         {/*// <!--email-->*/}
                         <div className="form-group input-group">
                             <input className="form-control" type="email"
                                    placeholder="email"
-                                   onChange={event => this.handleChange(event, 'email')}
+                                   onChange={event => handleChange(event, 'email')}
                                    required
                             />
                         </div>
@@ -97,7 +78,7 @@ class login extends Component {
                         <div className="form-group input-group">
                             <input className="form-control" type="password"
                                    placeholder="password"
-                                   onChange={event => this.handleChange(event, 'password')}
+                                   onChange={event => handleChange(event, 'password')}
                                    required
                             />
                         </div>
@@ -116,35 +97,33 @@ class login extends Component {
         )
     }
 
-    renderWelcomeFrom() {
+    function renderWelcomeFrom() {
         return (
             <div className="col-lg-6 col-md-6 col-sm-10 welcome-form">
                 <div className="p-0 ">
-                    <p className="text-center m-0">hi {this.props.info.name} </p>
+                    <p className="text-center m-0">hi {props.info.name} </p>
                 </div>
                 <div>
-                    <button className="my-btn" onClick={this.props.onLogOut}>log out</button>
+                    <button className="my-btn" onClick={props.onLogOut}>log out</button>
                 </div>
             </div>
         )
     }
 
-    render() {
-        let loginForm = '';
-        if (!this.props.submit) {
-            loginForm = this.renderLoginForm()
-        } else {
-            loginForm = this.renderWelcomeFrom()
-        }
-        return (
-            <PageHOC>
-                <Slider/>
-                <div className="container login center">
-                    {loginForm}
-                </div>
-            </PageHOC>
-        )
+    let loginForm = '';
+    if (!props.submit) {
+        loginForm = renderLoginForm()
+    } else {
+        loginForm = renderWelcomeFrom()
     }
+    return (
+        <PageHOC>
+            <Slider/>
+            <div className="container login center">
+                {loginForm}
+            </div>
+        </PageHOC>
+    )
 }
 
 const mapStateToProps = state => {
@@ -160,4 +139,4 @@ const mapDispatchToProps = dispatch => {
         onLogOut: () => dispatch(actionCreators.userLogOut())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
