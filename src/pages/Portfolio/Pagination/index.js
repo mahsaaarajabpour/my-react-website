@@ -1,48 +1,38 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {NavLink} from "react-router-dom";
 
-class pagination extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            pageId: null,
-            checkPage: true,
-        }
-    }
+function Pagination(props) {
 
-
-    renderPrevPage() {
-        const pId = Number(this.props.pageId) - 1;
-        if (this.props.pageCount) {
-            if (Number(this.props.pageId) === 1) {
+    const renderPrevPage = () => {
+        const pId = Number(props.pageId) - 1;
+        if (props.pageCount) {
+            if (Number(props.pageId) === 1)
                 return <NavLink id="prevBtn" className="disabled-Btn " to={"/portfolio/" + pId}>
                     <i className="fas fa-angle-double-left"></i>
                 </NavLink>
-            } else {
+            else
                 return <NavLink id="prevBtn" className="prev-page-btn " to={"/portfolio/" + pId}>
                     <i className="fas fa-angle-double-left"></i>
                 </NavLink>
-            }
+
         }
     }
 
-    renderLi() {
-        const j = this.props.pageCount;
+    const renderLi = () => {
+        const j = props.pageCount;
         let link = [];
-        if (this.props.pageCount !== null) {
+        if (props.pageCount !== null) {
             for (let i = 1; i <= j; i++) {
-                link.push(
-                    <NavLink key={i} to={"/portfolio/" + i}>{i}</NavLink>
-                )
+                link.push(<NavLink key={i} to={"/portfolio/" + i}>{i}</NavLink>)
             }
             return link;
         }
     }
 
-    renderNextPage() {
-        const pId = Number(this.props.pageId) + 1;
-        if (this.props.pageCount) {
-            if (Number(this.props.pageId) >= this.props.pageCount) { //disable next-btn
+    const renderNextPage = () => {
+        const pId = Number(props.pageId) + 1;
+        if (props.pageCount) {
+            if (Number(props.pageId) >= props.pageCount) { //disable next-btn
                 return <NavLink id="nextBtn" className="disabled-Btn" to={"/portfolio/" + pId}>
                     <i className="fas fa-angle-double-right"></i>
                 </NavLink>
@@ -53,22 +43,19 @@ class pagination extends Component {
             }
         }
     }
-
-    render() {
-        return (
-            <div className="m-pagination">
-                <div className="prev">
-                    {this.renderPrevPage()}
-                </div>
-                <div className="col col-md-6 center-page">
-                    {this.renderLi()}
-                </div>
-                <div className="next">
-                    {this.renderNextPage()}
-                </div>
+    return (
+        <div className="m-pagination">
+            <div className="prev">
+                {renderPrevPage()}
             </div>
-        );
-    }
+            <div className="col col-md-6 center-page">
+                {renderLi()}
+            </div>
+            <div className="next">
+                {renderNextPage()}
+            </div>
+        </div>
+    );
 }
 
-export default pagination;
+export default Pagination;
