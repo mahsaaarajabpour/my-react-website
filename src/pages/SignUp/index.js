@@ -1,90 +1,52 @@
-import React, {Component} from 'react'
+import React, {useState} from 'react'
 import {NavLink} from "react-router-dom";
 import './SignUp.css'
 import axios from "axios";
 import PageHOC from "../../components/PageHOC";
 
-class signUp extends Component {
-    constructor() {
-        super();
-        this.state = {
-            users: {
-                name: '',
-                lastName: '',
-                email: '',
-                password: null
-            },
-            emailError: false,
-            submit: false,
-        }
-    }
+function SignUp() {
 
-    //
-    // mySubmitHandler = (event) => {
-    //     event.preventDefault();
-    //     this.signUp()
-    // }
-    handleChange(e, type) {
+    const [users, setUsers] = useState({name: '', lastName: '', email: '', password: null})
+    const [emailError, setEmailError] = useState(false)
+    const [submit, setSubmit] = useState(false)
+
+    const handleChange = (e, type) => {
         e.preventDefault();
         switch (type) {
             case "name":
-                this.setState({
-                    users: {
-                        ...this.state.users,
-                        name: e.target.value
-                    }
-                })
+                setUsers({...users, name: e.target.value})
                 break;
             case "lastName":
-                this.setState({
-                    users: {
-                        ...this.state.users,
-                        lastName: e.target.value
-                    }
-                })
+                setUsers({...users, lastName: e.target.value})
                 break;
             case "email":
-                this.setState({
-                    users: {
-                        ...this.state.users,
-                        email: e.target.value
-                    }
-                })
+                setUsers({...users, email: e.target.value})
                 break;
             case "password":
-                this.setState({
-                    users: {
-                        ...this.state.users,
-                        password: e.target.value
-                    }
-                })
+                setUsers({...users, password: e.target.value})
                 break;
             // no default
         }
     }
 
     //handleSubmit
-    signUp = (event) => {
+    const signUp = (event) => {
         event.preventDefault();
         axios.get('https://my-shop-react-cdca2-default-rtdb.firebaseio.com/users.json')
             .then(response => {
-                this.setState({emailError: false})
+                setEmailError(false)
                 for (let key in response.data) {
                     response.data[key].id = key
-                    if (response.data[key].email === this.state.users.email) {
-                        this.setState({emailError: true})
+                    if (response.data[key].email === users.email) {
+                        setEmailError(true)
                         return
                     }
-                    // this.state.info.push(response.data[key])
                 }
-                if (this.state.emailError === false) {
-                    axios.post('https://my-shop-react-cdca2-default-rtdb.firebaseio.com/users.json', this.state.users)
+                if (emailError === false) {
+                    axios.post('https://my-shop-react-cdca2-default-rtdb.firebaseio.com/users.json', users)
                         .then(response => {
                             if (response.data != null) {
-                                this.setState({submit: true})
-                                // this.UserLogin(true)
-                                // this.$store.state.userInfo = this.userInfo
-                                // console.log(response)
+                                setSubmit(true)
                             }
                         })
                         .catch(error => {
@@ -97,19 +59,19 @@ class signUp extends Component {
             })
     }
 
-    logOut=()=>{
-        return  this.setState({submit:false})
+    const logOut = () => {
+        return setSubmit(false)
     }
 
-    renderSignUpForm() {
+    const renderSignUpForm = () => {
         return (
             <PageHOC>
                 <div className="container sign-up">
                     <div className="col-lg-6 col-md-6 col-sm-10 main-form ">
-                        {this.state.emailError &&
+                        {emailError &&
                         <p className="alert-danger text-center text-danger">email error</p>
                         }
-                        <form className="m-3" onSubmit={this.signUp}>
+                        <form className="m-3" onSubmit={signUp}>
                             {/*firstname*/}
                             <div className="form-group input-group">
                                 <div className="fix-input-icon">
@@ -118,7 +80,7 @@ class signUp extends Component {
                                 <input className="form-control"
                                        placeholder="first name"
                                        type="text"
-                                       onChange={event => this.handleChange(event, 'name')}
+                                       onChange={event => handleChange(event, 'name')}
                                        required
                                 />
                             </div>
@@ -130,7 +92,7 @@ class signUp extends Component {
                                 <input className="form-control"
                                        placeholder="last name"
                                        type="text"
-                                       onChange={event => this.handleChange(event, 'lastName')}
+                                       onChange={event => handleChange(event, 'lastName')}
                                        required
                                 />
                             </div>
@@ -142,7 +104,7 @@ class signUp extends Component {
                                 <input className="form-control"
                                        placeholder="Email address"
                                        type="email"
-                                       onChange={event => this.handleChange(event, 'email')}
+                                       onChange={event => handleChange(event, 'email')}
                                        required
                                 />
                             </div>
@@ -154,7 +116,7 @@ class signUp extends Component {
                                 <input className="form-control"
                                        placeholder="Create password"
                                        type="password"
-                                       onChange={event => this.handleChange(event, 'password')}
+                                       onChange={event => handleChange(event, 'password')}
                                        required
                                 />
                             </div>
@@ -173,16 +135,16 @@ class signUp extends Component {
         )
     }
 
-    renderWelcomeForm() {
+    const renderWelcomeForm = () => {
         return (
             <PageHOC>
                 <div className="container center sign-up">
                     <div className="col-lg-6 col-md-6 col-sm-10 welcome-form">
                         <div className="p-0 ">
-                            <p className="text-center m-0">hi {this.state.users.name} </p>
+                            <p className="text-center m-0">hi {users.name} </p>
                         </div>
                         <div>
-                            <button className="my-btn" onClick={this.logOut}>log out</button>
+                            <button className="my-btn" onClick={logOut}>log out</button>
                         </div>
                     </div>
                 </div>
@@ -190,15 +152,13 @@ class signUp extends Component {
         )
     }
 
-    render() {
-        let form = '';
-        if (!this.state.submit) {
-            form = this.renderSignUpForm()
-        } else {
-            form = this.renderWelcomeForm()
-        }
-        return form
+    let form = '';
+    if (!submit) {
+        form = renderSignUpForm()
+    } else {
+        form = renderWelcomeForm()
     }
+    return form
 }
 
-export default signUp;
+export default SignUp;
