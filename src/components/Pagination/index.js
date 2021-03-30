@@ -1,17 +1,17 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
 
-function Pagination(props) { // props=  pId ,  blogPageCount
+function Pagination(props) { // props=  pageId ,  pageCount , hrefLinkName
 
     const renderPrevPage = () => {
-        const pId = Number(props.pId) - 1;
-        if (props.blogPageCount) {
-            if (Number(props.pId) === 1) {
-                return <NavLink id="prevBtn" className="disabled-Btn" to={"/blogs/" + pId}>
+        const pId = Number(props.pageId) - 1;
+        if (props.pageCount) {
+            if (Number(props.pageId) === 1) {
+                return <NavLink id="prevBtn" className="disabled-Btn" to={"/"+ props.hrefLinkName + "/" + pId}>
                     <i className="fas fa-angle-double-left"></i>
                 </NavLink>
             } else {
-                return <NavLink id="prevBtn" className="prev-page-btn " to={"/blogs/" + pId}>
+                return <NavLink id="prevBtn" className="prev-page-btn " to={"/"+ props.hrefLinkName + "/" + pId}>
                     <i className="fas fa-angle-double-left"></i>
                 </NavLink>
             }
@@ -19,12 +19,12 @@ function Pagination(props) { // props=  pId ,  blogPageCount
     }
 
     const renderLi = () => {
-        const j = props.blogPageCount;
+        const j = props.pageCount;
         let link = [];
-        if (props.blogPageCount !== null) {
+        if (props.pageCount !== null) {
             for (let i = 1; i <= j; i++) {
                 link.push(
-                    <NavLink key={i} to={"/blogs/" + i}>{i}</NavLink>
+                    <NavLink key={i} to={"/"+ props.hrefLinkName + "/" + i}>{i}</NavLink>
                 )
             }
             return link;
@@ -32,14 +32,14 @@ function Pagination(props) { // props=  pId ,  blogPageCount
     }
 
     const renderNextPage = () => {
-        const pId = Number(props.pId) + 1;
-        if (props.blogPageCount) {
-            if (Number(props.pId) >= props.blogPageCount) { //disable next-btn
-                return <NavLink id="nextBtn" className="disabled-Btn" to={"/blogs/" + pId}><i
+        const pId = Number(props.pageId) + 1;
+        if (props.pageCount) {
+            if (Number(props.pageId) >= props.pageCount) { //disable next-btn
+                return <NavLink id="nextBtn" className="disabled-Btn" to={"/"+ props.hrefLinkName + "/" + pId}><i
                     className="fas fa-angle-double-right"></i>
                 </NavLink>
             } else {// enable next-btn
-                return <NavLink id="nextBtn" className="next-page-btn" to={"/blogs/" + pId}>
+                return <NavLink id="nextBtn" className="next-page-btn" to={"/"+ props.hrefLinkName + "/" + pId}>
                     <i className="fas fa-angle-double-right"></i>
                 </NavLink>
             }

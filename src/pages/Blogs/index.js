@@ -102,8 +102,9 @@ function Blogs(props) {
                             decreasedBlogs={decreasedBlogs}/>
                     </div>
                     <div className="row blogs-footer ">
-                        <Pagination blogPageCount={blogPageCount}
-                        pId={props.match.params.id}
+                        <Pagination pageCount={blogPageCount}
+                                    pageId={props.match.params.id}
+                                    hrefLinkName="blogs"
                         />
                     </div>
                 </div>

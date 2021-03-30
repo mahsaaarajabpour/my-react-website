@@ -1,6 +1,7 @@
+/* eslint-disable */
 import React, {useState, useEffect} from 'react'
-import Pagination from './Pagination'
-import {NavLink, Route} from "react-router-dom";
+import Pagination from '../../components/Pagination'
+import {NavLink} from "react-router-dom";
 import faker from 'faker/locale/en'
 import './Portfolio.css'
 import PageHOC from "../../components/PageHOC";
@@ -16,10 +17,9 @@ function Portfolio(props) {
             setPageCount(pCount)
             setCheck(true)
         }
-        // eslint-disable-next-line
     }, [])
 
-    function renderVideos() {
+    const renderVideos=()=> {
         let videos = [];
         for (let i = 0; i < 9; i++) {
             videos.push(
@@ -68,8 +68,10 @@ function Portfolio(props) {
                         {renderVideos()}
                     </div>
                     <div className="portfolio-footer">
-                        <Route component={() => <Pagination pageCount={pageCount}
-                                                            pageId={props.match.params.id}/>}/>
+                        <Pagination pageCount={pageCount}
+                                    pageId={props.match.params.id}
+                                    hrefLinkName="portfolio"
+                        />
                     </div>
                 </div>
             </div>
