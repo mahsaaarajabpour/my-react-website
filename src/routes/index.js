@@ -3,8 +3,8 @@ import {Route, Switch,} from "react-router-dom";
 
 const Contact = React.lazy(() => import ('../pages/Contact'))
 const SignUp = React.lazy(() => import('../pages/SignUp'))
-const CreateBlog = React.lazy(() => import('../pages/Blogs/CreateBlog'))
-const BLog = React.lazy(() => import('../pages/Blogs/Blog'))
+const CreateBlog = React.lazy(() => import('../pages/CreateBlog'))
+const BLog = React.lazy(() => import('../pages/Blog'))
 const Portfolio = React.lazy(() => import('../pages/Portfolio'))
 const Blogs = React.lazy(() => import('../pages/Blogs'))
 const Login = React.lazy(() => import('../pages/Login'))

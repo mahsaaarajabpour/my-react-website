@@ -3,12 +3,12 @@ import {NavLink} from "react-router-dom";
 import './CreateBlog.css'
 import axios from "axios";
 import {connect} from 'react-redux'
-import PageHOC from "../../../components/PageHOC";
+import PageHOC from "../../components/PageHOC";
 
-function CreateBlog (props){
+function CreateBlog(props) {
 
-    const [postedBlog,setPostedBlog]=useState(false)
-    const [newBlog,setNewBlog]=useState({title:'',content:'',categories:[]})
+    const [postedBlog, setPostedBlog] = useState(false)
+    const [newBlog, setNewBlog] = useState({title: '', content: '', categories: []})
 
 
     function renderPostBlogForm() {
@@ -145,8 +145,8 @@ function CreateBlog (props){
         switch (type) {
             case 'title':
                 setNewBlog({
-                        ...newBlog,
-                        title: event.target.value
+                    ...newBlog,
+                    title: event.target.value
                 })
                 break;
             case 'content':
@@ -170,8 +170,8 @@ function CreateBlog (props){
                 break;
             case 'writer':
                 setNewBlog({
-                        ...newBlog,
-                        writer: event.target.value
+                    ...newBlog,
+                    writer: event.target.value
                 })
                 break;
             // no default
@@ -202,7 +202,6 @@ function CreateBlog (props){
         </PageHOC>
     )
 }
-
 
 export const mapStateToProps = state => {
     return {

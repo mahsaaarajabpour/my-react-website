@@ -3,7 +3,7 @@ import React, {useState, useEffect, useRef,useCallback} from 'react'
 import {NavLink} from "react-router-dom";
 import './Blogs.css'
 import axios from "axios";
-import './Blog/Blog.css'
+import '../Blog/Blog.css'
 import PageHOC from "../../components/PageHOC";
 import ShowBlogs from "./ShowBlogs";
 import SearchBar from "./SearchBar";

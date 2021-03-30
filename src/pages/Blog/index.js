@@ -2,7 +2,7 @@ import React ,{useState} from 'react'
 import {NavLink} from "react-router-dom";
 import './Blog.css'
 import faker from 'faker/locale/en'
-import PageHOC from "../../../components/PageHOC";
+import PageHOC from "../../components/PageHOC";
 
 
 function Blog(props){
