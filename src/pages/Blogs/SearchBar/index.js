@@ -2,7 +2,6 @@
 import React, {useState,useEffect} from 'react';
 import '../Blogs.css'
 
-
 function SearchBar(props){
 
     const [loading, setLoading] = useState(false);
@@ -43,7 +42,6 @@ function SearchBar(props){
         debouncedSave(input);
     };
 
-
     return(
         <div className="search-panel">
             <div className="search-bar d-flex justify-content-center">
@@ -52,7 +50,6 @@ function SearchBar(props){
                        type="text"
                        placeholder="search your blog"
                        onChange={event => handleChangeSearch(event)}
-
                 />
             </div>
             {loading === true &&

@@ -7,6 +7,7 @@ import './Blog/Blog.css'
 import PageHOC from "../../components/PageHOC";
 import ShowBlogs from "./ShowBlogs";
 import SearchBar from "./SearchBar";
+import Pagination from "../../components/Pagination";
 
 function Blogs(props) {
     const [blogs, setBlogs] = useState([])
@@ -64,65 +65,6 @@ function Blogs(props) {
             })
     }
 
-    function renderPrevPage() {
-        const pId = Number(props.match.params.id) - 1;
-        if (blogPageCount) {
-            if (Number(props.match.params.id) === 1) {
-                return <NavLink id="prevBtn" className="disabled-Btn" to={"/blogs/" + pId}>
-                    <i className="fas fa-angle-double-left"></i>
-                </NavLink>
-            } else {
-                return <NavLink id="prevBtn" className="prev-page-btn " to={"/blogs/" + pId}>
-                    <i className="fas fa-angle-double-left"></i>
-                </NavLink>
-            }
-        }
-    }
-
-    function renderLi() {
-        const j = blogPageCount;
-        let link = [];
-        if (blogPageCount !== null) {
-            for (let i = 1; i <= j; i++) {
-                link.push(
-                    <NavLink key={i} to={"/blogs/" + i}>{i}</NavLink>
-                )
-            }
-            return link;
-        }
-    }
-
-    function renderNextPage() {
-        const pId = Number(props.match.params.id) + 1;
-        if (blogPageCount) {
-            if (Number(props.match.params.id) >= blogPageCount) { //disable next-btn
-                return <NavLink id="nextBtn" className="disabled-Btn" to={"/blogs/" + pId}><i
-                    className="fas fa-angle-double-right"></i>
-                </NavLink>
-            } else {// enable next-btn
-                return <NavLink id="nextBtn" className="next-page-btn" to={"/blogs/" + pId}>
-                    <i className="fas fa-angle-double-right"></i>
-                </NavLink>
-            }
-        }
-    }
-
-    function renderPagination() {
-        return (
-            <div className="m-pagination">
-                <div className="prev">
-                    {renderPrevPage()}
-                </div>
-                <div className="col col-md-6 center-page">
-                    {renderLi()}
-                </div>
-                <div className="next">
-                    {renderNextPage()}
-                </div>
-            </div>
-        )
-    }
-
     function getResults(results,error) {
         setSearchResults(results)
         setError(error)
@@ -160,7 +102,9 @@ function Blogs(props) {
                             decreasedBlogs={decreasedBlogs}/>
                     </div>
                     <div className="row blogs-footer ">
-                        {renderPagination()}
+                        <Pagination blogPageCount={blogPageCount}
+                        pId={props.match.params.id}
+                        />
                     </div>
                 </div>
             </div>
