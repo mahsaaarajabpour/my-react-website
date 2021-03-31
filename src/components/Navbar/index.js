@@ -1,18 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {NavLink} from "react-router-dom";
 import './Navbar.css'
-import $ from "jquery";
 import {connect} from "react-redux"
 import * as actionCreators from '../../redux'
 
 function Navbar(props) {
-    useEffect(() => {
-        return () => {
-            $('.navbar-collapse').click('li', function () {
-                $('.navbar-collapse').collapse('hide');
-            });
-        }
-    }, [])
 
     const renderWelcomeName = () => {
         let subValue = ''
@@ -41,24 +33,26 @@ function Navbar(props) {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="myNavDropdown">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/" exact>Home</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/portfolio/1">Portfolio</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/blogs/1">Blogs</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/create-blog">Add Blog</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/contact">Contact</NavLink>
-                    </li>
-                </ul>
-                {renderWelcomeName()}
+                <div className="navbar-content">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/" exact>Home</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/portfolio/1">Portfolio</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/blogs/1">Blogs</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/create-blog">Add Blog</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/contact">Contact</NavLink>
+                        </li>
+                    </ul>
+                    {renderWelcomeName()}
+                </div>
             </div>
         </nav>
     )
